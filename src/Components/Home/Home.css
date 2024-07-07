@@ -1,3 +1,17 @@
+body {
+  background: linear-gradient(135deg, #43C6AC, #191654); /* Degradado verde a turquesa */
+  background-size: 400% 400%;
+  animation: gradientBackground 15s ease infinite;
+}
+
+@keyframes gradientBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+
 .header {
   background-color: black;
   display: flex;
@@ -22,10 +36,11 @@
   align-items: center;
 }
 
-.logo {
-  width: 150px;
-  height: 150px;
-  right: 150px;
+.header .logo-home {
+  width: 100px;
+  height: auto;
+  position: relative;
+  left: 525px;
   background-color: transparent;
 }
 

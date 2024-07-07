@@ -12,9 +12,9 @@
   transition: top 0.3s;
 }
 
-.header .logo {
+.header .logo-verproductos {
   width: 100px;
-  height: 100px;
+  height: auto;
   position: relative;
   left: 450px;
   background-color: transparent;

@@ -2,18 +2,27 @@ import React, { useState } from 'react';
 import './VerProductos.css'; 
 import logo from './Assets/logo.jpg';
 import { TiHome } from "react-icons/ti";
+import { useNavigate } from 'react-router-dom';
 
-const Header = () => (
-  <header className="header">
-    <div className="header-left">
-      <button className="home">
-        <TiHome className="home-icon" />         
-        <span>Inicio</span>
-      </button>
-      <img src={logo} alt="Logo" className="logo" />
-    </div>
-  </header>
-);
+const Header = () => {
+  const navigate = useNavigate();
+
+  const handleNavigateHome = () => {
+    navigate('/home');
+  };
+
+  return (
+    <header className="header">
+      <div className="header-left">
+        <button className="home" onClick={handleNavigateHome}>
+          <TiHome className="home-icon" />         
+          <span>Inicio</span>
+        </button>
+        <img src={logo} alt="Logo" className="logo-verproductos" />
+      </div>
+    </header>
+  );
+};
 
 const NavBar = ({ filterCategory, selectedCategory }) => (
   <nav className="navbar">
@@ -50,7 +59,7 @@ const ProductList = ({ products }) => (
   </div>
 );
 
-const App = () => {
+const VerProductos = () => {
   const allProducts = [
     { id: 1, name: 'Balón de Fútbol', price: '10 USD', category: 'Fútbol' },
     { id: 2, name: 'Camiseta de Fútbol', price: '15 USD', category: 'Fútbol' },
@@ -71,7 +80,7 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div className="VerProductos">
       <Header />
       <NavBar filterCategory={filterCategory} selectedCategory={selectedCategory} />
       <ProductList products={products} />
@@ -79,4 +88,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default VerProductos;

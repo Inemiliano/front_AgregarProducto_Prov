@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 
-body {
+.login-background {
 
   font-family: 'poppins', 'sans-serif';
   -webkit-font-smoothing: antialiased;

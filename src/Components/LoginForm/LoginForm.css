@@ -20,11 +20,11 @@
   margin: 0px;
 }
 
-.logo {
+.header .logo-loginform {
   width: 100px;
   height: auto;
   position: relative;
-  left: 500px;
+  left: 525px;
   background-color: transparent;
 }
 
