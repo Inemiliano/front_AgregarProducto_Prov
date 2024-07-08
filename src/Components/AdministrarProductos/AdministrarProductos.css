@@ -1,0 +1,145 @@
+.header {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: top 0.3s;
+  }
+
+  .header h1 {
+    color: white;
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+}
+  
+  .header .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    color: #e0e0e0;
+    background-color: black;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .header .home:hover {
+    background-color: rgb(0, 0, 140);
+  }
+  
+  .header .home-icon {
+    font-size: 24px;
+    margin-right: 8px;
+  }
+  
+  .container {
+    padding: 20px;
+    margin-top: 150px;
+     
+  }
+
+ h2 {
+    text-align: center;
+    margin: 10px;
+  }
+  
+  #addProductForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  #addProductForm input,
+  #addProductForm select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+  }
+  
+  #addProductForm button {
+    padding: 10px 25px;
+    margin-top: 10px;
+    background-color: #1565C0;
+    color: black;
+    border-radius: 10px ;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #addProductForm button:hover {
+    background-color: #00bfff;
+  }
+  
+  #productListAdmin {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+    padding: 20px;
+  }
+  
+  .product-admin {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-info-Ad {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+  }
+  
+  .product-info-Ad img {
+    width: 150px;
+    height: 150px;
+    margin-left: 220px;  
+    object-fit: cover;
+  }
+
+  .product-details {
+    flex: 1;
+    padding: 0 20px;
+  }
+  
+  .delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px; 
+    height: 80px; 
+    border-radius: 50%; 
+    margin-right: 50px;
+  }
+  
+  .delete-icon {
+    font-size: 80px; 
+  }
+  
+  .delete-button .text {
+    font-size: 14px;
+    color: black;
+  }

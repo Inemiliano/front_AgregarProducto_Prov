@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { ProductProvider } from './Components/Context/ProductContext'; // Importar el proveedor de contexto
 import LoginForm from './Components/LoginForm/LoginForm';
 import Home from './Components/Home/Home';
 import VerProductos from './Components/VerProductos/VerProductos';
@@ -20,13 +21,15 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/Login" element={<LoginForm onLogin={handleLogin} />} />
-        <Route path="/home" element={isLoggedIn ? <Home onLogout={handleLogout} /> : <Navigate to="/Login" replace />} />
-        <Route path="/VerProductos" element={<VerProductos />} />
-        <Route path="/AdministrarProductos" element={<AdministrarProductos />} />
-        <Route path="*" element={<Navigate to="/Login" replace />} />
-      </Routes>
+      <ProductProvider> {/* Envolver la aplicación con ProductProvider */}
+        <Routes>
+          <Route path="/Login" element={<LoginForm onLogin={handleLogin} />} />
+          <Route path="/home" element={isLoggedIn ? <Home onLogout={handleLogout} /> : <Navigate to="/Login" replace />} />
+          <Route path="/VerProductos" element={isLoggedIn ? <VerProductos /> : <Navigate to="/Login" replace />} />
+          <Route path="/AdministrarProductos" element={isLoggedIn ? <AdministrarProductos /> : <Navigate to="/Login" replace />} />
+          <Route path="*" element={<Navigate to="/Login" replace />} />
+        </Routes>
+      </ProductProvider>
     </Router>
   );
 }

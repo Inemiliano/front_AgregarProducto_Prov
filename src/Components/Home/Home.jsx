@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = ({ onLogout }) => {
   const navigate = useNavigate(); 
+
   const handleLogout = () => {
     if (onLogout) {
       onLogout();
@@ -18,6 +19,10 @@ const Home = ({ onLogout }) => {
   
   const handleVerProductos = () => {
     navigate('/VerProductos'); 
+  };
+
+  const handleAdministrarProductos = () => {
+    navigate('/AdministrarProductos'); 
   };
 
   return (
@@ -41,7 +46,7 @@ const Home = ({ onLogout }) => {
           </button>
         </div>
         <div className="item">
-          <button className='item-icon'>
+          <button className='item-icon' onClick={handleAdministrarProductos}>
             <TbBasketCog className='icon' />
             <span>Administrar productos</span>
           </button>

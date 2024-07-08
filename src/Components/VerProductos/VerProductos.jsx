@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import './VerProductos.css'; 
+import React, { useContext, useState } from 'react';
+import './VerProductos.css';
 import logo from './Assets/logo.jpg';
 import { TiHome } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
+import { ProductContext } from '../Context/ProductContext'; // Importar el contexto
 
 const Header = () => {
   const navigate = useNavigate();
@@ -60,30 +61,25 @@ const ProductList = ({ products }) => (
 );
 
 const VerProductos = () => {
-  const allProducts = [
-    { id: 1, name: 'Balón de Fútbol', price: '10 USD', category: 'Fútbol' },
-    { id: 2, name: 'Camiseta de Fútbol', price: '15 USD', category: 'Fútbol' },
-    { id: 3, name: 'Balón de Basquetbol', price: '12 USD', category: 'Basquetbol' },
-    { id: 4, name: 'Camiseta de Basquetbol', price: '20 USD', category: 'Basquetbol' },
-    { id: 5, name: 'Balón de Voleibol', price: '10 USD', category: 'Voleibol' },
-    { id: 6, name: 'Rodilleras de Voleibol', price: '8 USD', category: 'Voleibol' },
-    { id: 7, name: 'Gorra', price: '5 USD', category: 'Accesorios' },
-    { id: 8, name: 'Mochila', price: '25 USD', category: 'Accesorios' },
-  ];
+  const { products } = useContext(ProductContext); // Consumir el contexto de productos
 
-  const [products, setProducts] = useState(allProducts);
+  // Establecer estado local para la categoría seleccionada
   const [selectedCategory, setSelectedCategory] = useState('Fútbol');
 
+  // Función para filtrar productos por categoría
   const filterCategory = (category) => {
     setSelectedCategory(category);
-    setProducts(allProducts.filter(product => product.category === category));
+    // Lógica de filtrado de productos por categoría (a implementar según necesidad)
   };
 
+  // Filtrar productos según la categoría seleccionada
+  const filteredProducts = products.filter(product => product.category === selectedCategory);
+
   return (
-    <div className="VerProductos">
+    <div className="ver-productos">
       <Header />
       <NavBar filterCategory={filterCategory} selectedCategory={selectedCategory} />
-      <ProductList products={products} />
+      <ProductList products={filteredProducts} />
     </div>
   );
 };

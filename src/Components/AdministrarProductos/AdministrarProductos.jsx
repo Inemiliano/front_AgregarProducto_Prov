@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './AdministrarProductos.css';
-import logo from './Assets/logo.jpg';
 import { TiHome } from "react-icons/ti";
+import { MdCancel } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
+import { ProductContext } from '../Context/ProductContext';
 
+const Header = () => {
+  const navigate = useNavigate(); 
+  const goToHome = () => navigate('/home'); 
 
-const Header = () => (
-  <header id="header">
-    <h1>Panel de Administración</h1>
-    <div className="header-left">
-      <button className="home">
-        <TiHome className="home-icon" />         
+  return (
+    <header className="header">
+      <button className="home" onClick={goToHome}>
+        <TiHome className="home-icon" />
         <span>Inicio</span>
       </button>
-      <img src={logo} alt="Logo" className="logo" />
-    </div>
-  </header>
-);
+      <h1>Panel de Administración</h1>
+    </header>
+  );
+};
 
-const ProductForm = ({ addProduct }) => {
+const ProductForm = () => {
+  const { addProduct } = useContext(ProductContext);
   const [productName, setProductName] = useState('');
   const [productPrice, setProductPrice] = useState('');
   const [productImage, setProductImage] = useState(null);
@@ -90,55 +94,46 @@ const ProductForm = ({ addProduct }) => {
   );
 };
 
-const ProductListAdmin = ({ products, deleteProduct }) => (
-  <div id="productListAdmin">
-    {products.map((product) => (
-      <div key={product.id} className="product-admin">
-        <span>{product.name}</span>
-        <img src={product.image} alt={product.name} />
-        <button className="delete-button" onClick={() => deleteProduct(product.id)}>Eliminar</button>
-      </div>
-    ))}
-  </div>
-);
+const ProductListAdmin = ({ products }) => {
+  const { deleteProduct } = useContext(ProductContext);
+
+  return (
+    <div id="productListAdmin">
+      {products.map((product) => (
+        <div key={product.id} className="product-admin">
+          <div className="product-info-Ad">
+            <span>{product.name}</span>
+            <img src={product.image} alt={product.name} />
+          </div>
+          <button className="delete-button" onClick={() => deleteProduct(product.id)}>
+            <MdCancel className="delete-icon" />
+            <span className="text">Eliminar</span>
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const AdminPanel = () => {
-  const [products, setProducts] = useState([]);
+  const { products } = useContext(ProductContext);
 
   useEffect(() => {
-    const storedProducts = localStorage.getItem('products');
-    if (storedProducts) {
-      setProducts(JSON.parse(storedProducts));
-    }
+    //  operaciones adicionales al montar el componente si es necesario
   }, []);
-
-  const saveProductsToLocalStorage = (products) => {
-    localStorage.setItem('products', JSON.stringify(products));
-  };
-
-  const addProduct = (newProduct) => {
-    const updatedProducts = [...products, newProduct];
-    setProducts(updatedProducts);
-    saveProductsToLocalStorage(updatedProducts);
-  };
-
-  const deleteProduct = (productId) => {
-    const confirmDelete = window.confirm(`¿Estás seguro de que deseas eliminar este producto?`);
-    if (confirmDelete) {
-      const updatedProducts = products.filter((product) => product.id !== productId);
-      setProducts(updatedProducts);
-      saveProductsToLocalStorage(updatedProducts);
-    }
-  };
 
   return (
     <div className="App">
       <Header />
       <main className="container">
-        <h2>Agregar Nuevo Producto</h2>
-        <ProductForm addProduct={addProduct} />
-        <h2>Eliminar Productos</h2>
-        <ProductListAdmin products={products} deleteProduct={deleteProduct} />
+        <div className="section-container">
+          <h2>Agregar un nuevo producto</h2>
+          <ProductForm />
+        </div>
+        <div className="section-container">
+          <h2>Eliminar Productos</h2>
+          <ProductListAdmin products={products} />
+        </div>
       </main>
     </div>
   );
