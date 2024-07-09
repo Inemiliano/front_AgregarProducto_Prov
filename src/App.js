@@ -5,6 +5,8 @@ import LoginForm from './Components/LoginForm/LoginForm';
 import Home from './Components/Home/Home';
 import VerProductos from './Components/VerProductos/VerProductos';
 import AdministrarProductos from './Components/AdministrarProductos/AdministrarProductos';
+import DetalleProducto from './Components/DetallesProducto/DetalleProducto';
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para manejar la sesión
@@ -28,6 +30,7 @@ function App() {
           <Route path="/VerProductos" element={isLoggedIn ? <VerProductos /> : <Navigate to="/Login" replace />} />
           <Route path="/AdministrarProductos" element={isLoggedIn ? <AdministrarProductos /> : <Navigate to="/Login" replace />} />
           <Route path="*" element={<Navigate to="/Login" replace />} />
+          <Route path="/DetalleProducto" element={isLoggedIn ? <DetalleProducto /> : <Navigate to="/Login" replace />} />
         </Routes>
       </ProductProvider>
     </Router>

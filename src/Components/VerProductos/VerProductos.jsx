@@ -16,7 +16,7 @@ const Header = () => {
     <header className="header">
       <div className="header-left">
         <button className="home" onClick={handleNavigateHome}>
-          <TiHome className="home-icon" />         
+          <TiHome className="home-icon" />
           <span>Inicio</span>
         </button>
         <img src={logo} alt="Logo" className="logo-verproductos" />
@@ -36,26 +36,39 @@ const NavBar = ({ filterCategory, selectedCategory }) => (
   </nav>
 );
 
-const ProductCard = ({ name, price }) => (
-  <div className="product-card">
-    <div className="product-image">
-      <img src="placeholder.png" alt={name} />
-    </div>
-    <div className="product-info">
-      <h3>{name}</h3>
-      <p>{price}</p>
-      <div className="product-buttons">
-        <button className="btn-view">Ver</button>
-        <button className="btn-order">Pedir</button>
+const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+
+  const handleViewClick = () => {
+    navigate('/DetalleProducto', { state: { product } });
+  };
+
+  const handleOrderClick = () => {
+    // Implementa la funcionalidad del botón "Pedir"
+    alert(`Has pedido el producto: ${product.name}`);
+  };
+
+  return (
+    <div className="product-card">
+      <div className="product-image">
+        <img src={product.image || "placeholder.png"} alt={product.name} />
+      </div>
+      <div className="product-info">
+        <h3>{product.name}</h3>
+        <p>{product.price}</p>
+        <div className="product-buttons">
+          <button className="btn-view" onClick={handleViewClick}>Ver</button>
+          <button className="btn-order" onClick={handleOrderClick}>Pedir</button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const ProductList = ({ products }) => (
   <div className="product-list">
     {products.map(product => (
-      <ProductCard key={product.id} name={product.name} price={product.price} />
+      <ProductCard key={product.id} product={product} />
     ))}
   </div>
 );

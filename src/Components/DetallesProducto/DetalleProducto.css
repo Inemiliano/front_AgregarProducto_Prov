@@ -1,0 +1,149 @@
+.detalle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh; 
+    background-color: transparent; 
+    position: relative;
+    padding-top: 220px; 
+}
+
+.header {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header .home,
+.header .back {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    color: #e0e0e0;
+    background-color: black;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.header .home:hover {
+    background-color: rgb(0, 0, 140);
+}
+.header .back:hover{
+    background-color: rgb(26, 170, 223);
+}
+
+.header .home-icon,
+.header .back-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.header .logo-DetallePro {
+    width: 100px;
+    height: auto;
+    position: relative;
+    background-color: transparent;
+}
+
+.detalle-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.product-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image img {
+    width: 80%; /* tamaño de la imagen según sea necesario */
+    max-width: 400px;
+}
+
+.product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-details label {
+    margin-top: 10px;
+}
+
+.product-details input {
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.product-details .sizes {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.product-details .sizes button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.product-details .sizes button:hover {
+    background-color: #ddd;
+}
+
+.product-details .order-button {
+    padding: 10px 25px;
+    margin-top: 20px;
+    background-color: #00ff40;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.product-details .order-button:hover {
+    background-color: #41cc00;
+}
+
+.sizes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.size-button {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: green;
+    margin: 10px;
+    color: black;
+}
+
+.size-button.selected {
+    color: green; 
+}
