@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TiHome } from "react-icons/ti";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate, useLocation } from 'react-router-dom';
 import './DetalleProducto.css';
 import logo from './Assets/logo.jpg';
+import { OrderContext } from '../Context/OrderContext';
 
 const DetalleProducto = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { product } = location.state || {};
-
+  const { addOrder } = useContext(OrderContext);
   const [selectedSize, setSelectedSize] = useState(null);
 
   const handleHomeClick = () => {
@@ -22,6 +23,19 @@ const DetalleProducto = () => {
 
   const handleSizeClick = (size) => {
     setSelectedSize(size);
+  };
+
+  const handleOrderClick = () => {
+    const name = prompt("Por favor ingresa nombre y apellido:");
+    if (name) {
+      addOrder({
+        cliente: name,
+        productos: `${product.name} - Talla: ${selectedSize}`,
+        cantidad: 1,
+        total: product.price
+      });
+      alert(`Has pedido el producto: ${product.name} - Talla: ${selectedSize}`);
+    }
   };
 
   if (!product) {
@@ -71,7 +85,7 @@ const DetalleProducto = () => {
           </div>
           <label>Precio</label>
           <input type="text" value={product.price} readOnly />
-          <button className="order-button">Pedir</button>
+          <button className="order-button" onClick={handleOrderClick}>Pedir</button>
         </div>
       </main>
     </div>

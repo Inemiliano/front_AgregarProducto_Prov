@@ -25,6 +25,10 @@ const Home = ({ onLogout }) => {
     navigate('/AdministrarProductos'); 
   };
 
+  const handleVerPedidos = () => {
+    navigate('/VerPedidos'); 
+  };
+
   return (
     <div className="home">
       <header className="header">
@@ -52,7 +56,7 @@ const Home = ({ onLogout }) => {
           </button>
         </div>
         <div className="item">
-          <button className='item-icon'>
+          <button className='item-icon' onClick={handleVerPedidos}>
             <FaEnvelopeOpenText className='icon' />
             <span>Ver pedidos</span>
           </button>
