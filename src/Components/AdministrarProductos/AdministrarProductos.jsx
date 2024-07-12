@@ -4,6 +4,7 @@ import { TiHome } from "react-icons/ti";
 import { MdCancel } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { ProductContext } from '../Context/ProductContext';
+import Notification from './Notification';
 
 const Header = () => {
   const navigate = useNavigate(); 
@@ -20,7 +21,7 @@ const Header = () => {
   );
 };
 
-const ProductForm = () => {
+const ProductForm = ({ onProductAdded }) => {
   const { addProduct } = useContext(ProductContext);
   const [productName, setProductName] = useState('');
   const [productPrice, setProductPrice] = useState('');
@@ -44,6 +45,7 @@ const ProductForm = () => {
         category: productCategory,
       };
       addProduct(newProduct);
+      onProductAdded();
       setProductName('');
       setProductPrice('');
       setProductImage(null);
@@ -94,7 +96,7 @@ const ProductForm = () => {
   );
 };
 
-const ProductListAdmin = ({ products }) => {
+const ProductListAdmin = ({ products, onProductDeleted }) => {
   const { deleteProduct } = useContext(ProductContext);
 
   return (
@@ -105,7 +107,7 @@ const ProductListAdmin = ({ products }) => {
             <span>{product.name}</span>
             <img src={product.image} alt={product.name} />
           </div>
-          <button className="delete-button" onClick={() => deleteProduct(product.id)}>
+          <button className="delete-button" onClick={() => {deleteProduct(product.id); onProductDeleted();}}>
             <MdCancel className="delete-icon" />
             <span className="text">Eliminar</span>
           </button>
@@ -117,6 +119,16 @@ const ProductListAdmin = ({ products }) => {
 
 const AdminPanel = () => {
   const { products } = useContext(ProductContext);
+  const [showDeleteSection, setShowDeleteSection] = useState(false);
+  const [notification, setNotification] = useState(null);
+
+  const handleProductAdded = () => {
+    setNotification('Producto agregado correctamente');
+  };
+
+  const handleProductDeleted = () => {
+    setNotification('Producto eliminado correctamente');
+  };
 
   useEffect(() => {
     //  operaciones adicionales al montar el componente si es necesario
@@ -128,12 +140,26 @@ const AdminPanel = () => {
       <main className="container">
         <div className="section-container">
           <h2>Agregar un nuevo producto</h2>
-          <ProductForm />
+          <ProductForm onProductAdded={handleProductAdded} />
         </div>
         <div className="section-container">
-          <h2>Eliminar Productos</h2>
-          <ProductListAdmin products={products} />
+          <label>
+            <span>Habilitar eliminación de productos</span>
+            <label className="switch">
+              <input type="checkbox" checked={showDeleteSection} onChange={() => setShowDeleteSection(!showDeleteSection)} />
+              <span className="slider"></span>
+            </label>
+          </label>
+          {showDeleteSection && (
+            <>
+              <h2>Eliminar Productos</h2>
+              <ProductListAdmin products={products} onProductDeleted={handleProductDeleted} />
+            </>
+          )}
         </div>
+        {notification && (
+          <Notification message={notification} onClose={() => setNotification(null)} />
+        )}
       </main>
     </div>
   );

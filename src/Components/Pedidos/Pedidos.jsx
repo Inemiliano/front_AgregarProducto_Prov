@@ -6,6 +6,7 @@ import { IoMdSearch } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import './Pedidos.css';
 import { OrderContext } from '../Context/OrderContext';
+import Notification from './Notification';
 
 const Pedidos = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const Pedidos = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [editIndex, setEditIndex] = useState(null);
   const [cancelIndex, setCancelIndex] = useState(null);
+  const [notification, setNotification] = useState(null);
 
   const handleHomeClick = () => {
     navigate('/home'); 
@@ -33,6 +35,7 @@ const Pedidos = () => {
 
   const handleSaveClick = () => {
     setEditIndex(null);
+    setNotification('Pedido modificado con éxito');
   };
 
   const handleCancelClick = (index) => {
@@ -43,6 +46,7 @@ const Pedidos = () => {
     const updatedPedidos = orders.filter((_, i) => i !== cancelIndex);
     setOrders(updatedPedidos);
     setCancelIndex(null);
+    setNotification('Pedido cancelado con éxito');
   };
 
   const handleCancelNo = () => {
@@ -66,6 +70,7 @@ const Pedidos = () => {
 
   return (
     <div className="pedidos-container">
+      {notification && <Notification message={notification} onClose={() => setNotification(null)} />}
       <header className="header">
         <button className="home" onClick={handleHomeClick}>
           <TiHome className="home-icon" />

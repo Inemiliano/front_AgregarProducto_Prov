@@ -24,15 +24,15 @@ function App() {
 
   return (
     <Router>
-      <OrderProvider> {/* Envolver la aplicación con OrderProvider */}
-        <ProductProvider> {/* Envolver la aplicación con ProductProvider */}
+      <OrderProvider> 
+        <ProductProvider>
           <Routes>
             <Route path="/Login" element={<LoginForm onLogin={handleLogin} />} />
             <Route path="/home" element={isLoggedIn ? <Home onLogout={handleLogout} /> : <Navigate to="/Login" replace />} />
             <Route path="/VerProductos" element={isLoggedIn ? <VerProductos /> : <Navigate to="/Login" replace />} />
             <Route path="/AdministrarProductos" element={isLoggedIn ? <AdministrarProductos /> : <Navigate to="/Login" replace />} />
             <Route path="/DetalleProducto" element={isLoggedIn ? <DetalleProducto /> : <Navigate to="/Login" replace />} />
-            <Route path="/VerPedidos" element={isLoggedIn ? <Pedidos /> : <Navigate to="/Login" replace />} /> {/* Proteger la ruta para Pedidos */}
+            <Route path="/VerPedidos" element={isLoggedIn ? <Pedidos /> : <Navigate to="/Login" replace />} /> 
             <Route path="*" element={<Navigate to="/Login" replace />} />
           </Routes>
         </ProductProvider>
