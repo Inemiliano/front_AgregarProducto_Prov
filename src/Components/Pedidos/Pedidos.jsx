@@ -3,10 +3,13 @@ import { TiHome } from "react-icons/ti";
 import { MdModeEdit } from "react-icons/md";
 import { TbBasketCancel } from "react-icons/tb";
 import { IoMdSearch } from "react-icons/io";
+import { IoArrowBackCircle } from "react-icons/io5"; 
+import { FaPlusCircle, FaEdit } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import './Pedidos.css';
 import { OrderContext } from '../Context/OrderContext';
 import Notification from './Notification';
+import { ModeContext } from '../Context/ModeContext';
 
 const Pedidos = () => {
   const navigate = useNavigate();
@@ -15,9 +18,15 @@ const Pedidos = () => {
   const [editIndex, setEditIndex] = useState(null);
   const [cancelIndex, setCancelIndex] = useState(null);
   const [notification, setNotification] = useState(null);
+  const { mode, setMode } = useContext(ModeContext); // Obtener setMode del contexto
 
   const handleHomeClick = () => {
     navigate('/home'); 
+  };
+
+  const handleBackClick = () => {
+    setMode('default'); // Restablecer el modo
+    navigate('/VerVentas'); // Navegar a la página de Ventas
   };
 
   const handleRealizarPedidoClick = () => {
@@ -25,7 +34,6 @@ const Pedidos = () => {
   };
 
   const handleSearchClick = () => {
-    // Lógica para buscar en la tabla
     console.log(`Buscar cliente: ${searchQuery}`);
   };
 
@@ -77,22 +85,30 @@ const Pedidos = () => {
           <span>Inicio</span>
         </button>
         <h1>Pedidos</h1>
+        {mode === 'add-sale' && (
+          <button className="back" onClick={handleBackClick}>
+            <IoArrowBackCircle className="back-icon" />
+            <span>Volver</span>
+          </button>
+        )}
       </header>
       <main className="main-content">
-        <div className="search-bar">
-          <input 
-            type="text" 
-            placeholder="Buscar cliente" 
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)} 
-          />
-          <button className="buscar-cliente" onClick={handleSearchClick}>
-            <IoMdSearch />
-          </button>
-          <button className="realizar-pedido" onClick={handleRealizarPedidoClick}>
-            Realizar Pedido
-          </button>
-        </div>
+        {mode !== 'add-sale' && (
+          <div className="search-bar">
+            <input 
+              type="text" 
+              placeholder="Buscar cliente" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)} 
+            />
+            <button className="buscar-cliente" onClick={handleSearchClick}>
+              <IoMdSearch />
+            </button>
+            <button className="realizar-pedido" onClick={handleRealizarPedidoClick}>
+              Realizar Pedido
+            </button>
+          </div>
+        )}
         <table className="tabla-pedidos">
           <thead>
             <tr>
@@ -143,14 +159,23 @@ const Pedidos = () => {
                 </td>
                 <td>{pedido.total}</td>
                 <td className="action-buttons">
-                  <button className="action-button edit" onClick={() => handleEditClick(index)}>
-                    <MdModeEdit className="icon" />
-                    <span className="text">Modificar</span>
-                  </button>
-                  <button className="action-button delete" onClick={() => handleCancelClick(index)}>
-                    <TbBasketCancel className="icon" />
-                    <span className="text">Cancelar</span>
-                  </button>
+                  {mode === 'add-sale' ? (
+                    <button className="action-button add">
+                      <FaPlusCircle className="icon" />
+                      <span className="text">Agregar</span>
+                    </button>
+                  ) : (
+                    <>
+                      <button className="action-button edit" onClick={() => handleEditClick(index)}>
+                        <MdModeEdit className="icon" />
+                        <span className="text">Modificar</span>
+                      </button>
+                      <button className="action-button delete" onClick={() => handleCancelClick(index)}>
+                        <TbBasketCancel className="icon" />
+                        <span className="text">Cancelar</span>
+                      </button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}

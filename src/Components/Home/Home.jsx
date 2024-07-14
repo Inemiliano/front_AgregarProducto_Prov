@@ -29,6 +29,10 @@ const Home = ({ onLogout }) => {
     navigate('/VerPedidos'); 
   };
 
+  const handleVerVentas = () => {
+    navigate('/VerVentas'); 
+  };
+
   return (
     <div className="home">
       <header className="header">
@@ -62,7 +66,7 @@ const Home = ({ onLogout }) => {
           </button>
         </div>
         <div className="item">
-          <button className='item-icon'>
+          <button className='item-icon' onClick={handleVerVentas}>
             <BsGraphUpArrow className='icon' />
             <span>Ver ventas</span>
           </button>
