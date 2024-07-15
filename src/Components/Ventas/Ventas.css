@@ -119,3 +119,21 @@
     font-size: 14px; 
   }
   
+  .action-button.save {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.action-button.save:hover {
+    background-color: darkgreen;
+}
+.save-icon {
+  font-size: 32px; 
+  margin-bottom: 5px; 
+}

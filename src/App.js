@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { ProductProvider } from './Components/Context/ProductContext'; // Importar el proveedor de contexto de productos
-import { OrderProvider } from './Components/Context/OrderContext'; // Importar el proveedor de contexto de pedidos
-import { ModeProvider } from './Components/Context/ModeContext'; // Importar el proveedor de contexto de modo
+import { ProductProvider } from './Components/Context/ProductContext';
+import { OrderProvider } from './Components/Context/OrderContext';
+import { ModeProvider } from './Components/Context/ModeContext';
+import { SalesProvider } from './Components/Context/SalesContext'; 
 import LoginForm from './Components/LoginForm/LoginForm';
 import Home from './Components/Home/Home';
 import VerProductos from './Components/VerProductos/VerProductos';
@@ -12,16 +13,15 @@ import Pedidos from './Components/Pedidos/Pedidos';
 import Ventas from './Components/Ventas/Ventas';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para manejar la sesión
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
-  // Función para cerrar sesión
   const handleLogout = () => {
     setIsLoggedIn(false);
-    return <Navigate to="/Login" replace />; // Redirige a la página de inicio de sesión
+    return <Navigate to="/Login" replace />;
   };
 
   return (
@@ -29,17 +29,19 @@ function App() {
       <OrderProvider> 
         <ProductProvider>
           <ModeProvider>
-            <Routes>
-              <Route path="/Login" element={<LoginForm onLogin={handleLogin} />} />
-              <Route path="/home" element={isLoggedIn ? <Home onLogout={handleLogout} /> : <Navigate to="/Login" replace />} />
-              <Route path="/VerProductos" element={isLoggedIn ? <VerProductos /> : <Navigate to="/Login" replace />} />
-              <Route path="/AdministrarProductos" element={isLoggedIn ? <AdministrarProductos /> : <Navigate to="/Login" replace />} />
-              <Route path="/DetalleProducto" element={isLoggedIn ? <DetalleProducto /> : <Navigate to="/Login" replace />} />
-              <Route path="/VerPedidos" element={isLoggedIn ? <Pedidos /> : <Navigate to="/Login" replace />} />
-              <Route path="/pedidos" element={isLoggedIn ? <Pedidos /> : <Navigate to="/Login" replace />} /> 
-              <Route path="/VerVentas" element={isLoggedIn ? <Ventas /> : <Navigate to="/Login" replace />} />
-              <Route path="*" element={<Navigate to="/Login" replace />} />
-            </Routes>
+            <SalesProvider>
+              <Routes>
+                <Route path="/Login" element={<LoginForm onLogin={handleLogin} />} />
+                <Route path="/Home" element={isLoggedIn ? <Home onLogout={handleLogout} /> : <Navigate to="/Login" replace />} />
+                <Route path="/VerProductos" element={isLoggedIn ? <VerProductos /> : <Navigate to="/Login" replace />} />
+                <Route path="/AdministrarProductos" element={isLoggedIn ? <AdministrarProductos /> : <Navigate to="/Login" replace />} />
+                <Route path="/DetalleProducto" element={isLoggedIn ? <DetalleProducto /> : <Navigate to="/Login" replace />} />
+                <Route path="/VerPedidos" element={isLoggedIn ? <Pedidos /> : <Navigate to="/Login" replace />} />
+                <Route path="/Pedidos" element={isLoggedIn ? <Pedidos /> : <Navigate to="/Login" replace />} /> 
+                <Route path="/VerVentas" element={isLoggedIn ? <Ventas /> : <Navigate to="/Login" replace />} />
+                <Route path="*" element={<Navigate to="/Login" replace />} />
+              </Routes>
+            </SalesProvider>
           </ModeProvider>
         </ProductProvider>
       </OrderProvider>

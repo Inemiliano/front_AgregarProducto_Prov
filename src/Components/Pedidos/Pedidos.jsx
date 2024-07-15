@@ -10,6 +10,7 @@ import './Pedidos.css';
 import { OrderContext } from '../Context/OrderContext';
 import Notification from './Notification';
 import { ModeContext } from '../Context/ModeContext';
+import { SalesContext } from '../Context/SalesContext'; 
 
 const Pedidos = () => {
   const navigate = useNavigate();
@@ -18,15 +19,16 @@ const Pedidos = () => {
   const [editIndex, setEditIndex] = useState(null);
   const [cancelIndex, setCancelIndex] = useState(null);
   const [notification, setNotification] = useState(null);
-  const { mode, setMode } = useContext(ModeContext); // Obtener setMode del contexto
+  const { mode, setMode } = useContext(ModeContext);
+  const { sales, setSales } = useContext(SalesContext); 
 
   const handleHomeClick = () => {
     navigate('/home'); 
   };
 
   const handleBackClick = () => {
-    setMode('default'); // Restablecer el modo
-    navigate('/VerVentas'); // Navegar a la página de Ventas
+    setMode('default');
+    navigate('/VerVentas'); 
   };
 
   const handleRealizarPedidoClick = () => {
@@ -70,6 +72,12 @@ const Pedidos = () => {
       updatedPedidos[index][field] = e.target.value;
     }
     setOrders(updatedPedidos);
+  };
+
+  const handleAddSaleClick = (index) => {
+    const newSale = orders[index];
+    setSales([...sales, newSale]);
+    setNotification('Venta agregada con éxito');
   };
 
   const filteredPedidos = orders.filter(pedido => 
@@ -160,7 +168,7 @@ const Pedidos = () => {
                 <td>{pedido.total}</td>
                 <td className="action-buttons">
                   {mode === 'add-sale' ? (
-                    <button className="action-button add">
+                    <button className="action-button add" onClick={() => handleAddSaleClick(index)}>
                       <FaPlusCircle className="icon" />
                       <span className="text">Agregar</span>
                     </button>
