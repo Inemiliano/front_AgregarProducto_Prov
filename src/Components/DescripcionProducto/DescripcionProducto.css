@@ -1,0 +1,146 @@
+.desc-detalle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh; 
+    background-color: transparent; 
+    position: relative;
+    padding-top: 220px; 
+}
+
+.desc-header {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: top 0.3s;
+}
+
+.desc-header .desc-logo-DetallePro {
+    width: 100px;
+    height: auto;
+    background-color: transparent;
+    margin-right: 565px;
+}
+
+.desc-header .desc-back {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+    color: #e0e0e0;
+    background-color: black;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: auto; 
+}
+
+.desc-header .desc-back:hover {
+    background-color: rgb(0, 0, 140);
+}
+
+.desc-header .desc-back-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.desc-detalle-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.desc-product-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.desc-product-image img {
+    width: 80%; /* tamaño de la imagen según sea necesario */
+    max-width: 400px;
+}
+
+.desc-product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.desc-product-details label {
+    margin-top: 10px;
+}
+
+.desc-product-details input {
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.desc-product-details .desc-sizes {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.desc-product-details .desc-sizes button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.desc-product-details .desc-sizes button:hover {
+    background-color: #ddd;
+}
+
+.desc-product-details .desc-order-button {
+    padding: 10px 25px;
+    margin-top: 20px;
+    background-color: #00ff40;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.desc-product-details .desc-order-button:hover {
+    background-color: #41cc00;
+}
+
+.desc-sizes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.desc-size-button {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: green;
+    margin: 10px;
+    color: black;
+}
+
+.desc-size-button.selected {
+    color: green; 
+}

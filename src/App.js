@@ -11,6 +11,12 @@ import AdministrarProductos from './Components/AdministrarProductos/AdministrarP
 import DetalleProducto from './Components/DetallesProducto/DetalleProducto';
 import Pedidos from './Components/Pedidos/Pedidos';
 import Ventas from './Components/Ventas/Ventas';
+import ClientLoginForm from './Components/ClientLoginForm/ClientLoginForm';
+import RegistroUser from './Components/RegistroUser/RegistroUser';
+import HomeClient from './Components/HomeClient/HomeClient';
+import DescripcionProducto from './Components/DescripcionProducto/DescripcionProducto';
+import PedidosCliente from './Components/PedidosCliente/PedidosCliente';
+import Pago from './Pago/Pago';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,6 +46,14 @@ function App() {
                 <Route path="/Pedidos" element={isLoggedIn ? <Pedidos /> : <Navigate to="/Login" replace />} /> 
                 <Route path="/VerVentas" element={isLoggedIn ? <Ventas /> : <Navigate to="/Login" replace />} />
                 <Route path="*" element={<Navigate to="/Login" replace />} />
+
+                {/* Rutas para el cliente */}
+                <Route path="/Inicia-Sesion" element={<ClientLoginForm onLogin={handleLogin} />} />
+                <Route path="/Registro" element={<RegistroUser onLogin={handleLogin} />} />
+                <Route path="/Velasport" element={isLoggedIn ? <HomeClient onLogout={handleLogout} /> : <Navigate to="/Inicia-Sesion" replace />} />
+                <Route path="/Descripcion" element={isLoggedIn ? <DescripcionProducto onLogout={handleLogout} /> : <Navigate to="/Inicia-Sesion" replace />} />
+                <Route path="/MisPedidos" element={isLoggedIn ? <PedidosCliente onLogout={handleLogout} /> : <Navigate to="/Inicia-Sesion" replace />} />
+                <Route path="/Pago" element={isLoggedIn ? <Pago onLogout={handleLogout} /> : <Navigate to="/Inicia-Sesion" replace />} />
               </Routes>
             </SalesProvider>
           </ModeProvider>
