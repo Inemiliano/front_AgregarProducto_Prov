@@ -4,7 +4,7 @@ import { MdModeEdit } from "react-icons/md";
 import { TbBasketCancel } from "react-icons/tb";
 import { IoMdSearch } from "react-icons/io";
 import { IoArrowBackCircle } from "react-icons/io5"; 
-import { FaPlusCircle, FaEdit } from "react-icons/fa";
+import { FaPlusCircle } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import './Pedidos.css';
 import { OrderContext } from '../Context/OrderContext';
@@ -125,6 +125,8 @@ const Pedidos = () => {
               <th>Productos</th>
               <th>Cantidad</th>
               <th>Total</th>
+              <th>Estado</th>
+              <th>Fecha de Entrega</th>
               <th>Acción</th>
             </tr>
           </thead>
@@ -166,6 +168,28 @@ const Pedidos = () => {
                   )}
                 </td>
                 <td>{pedido.total}</td>
+                <td>
+                  {editIndex === index ? (
+                    <input 
+                      type="text" 
+                      value={pedido.estado}
+                      onChange={(e) => handleInputChange(e, 'estado', index)} 
+                    />
+                  ) : (
+                    pedido.estado
+                  )}
+                </td>
+                <td>
+                  {editIndex === index ? (
+                    <input 
+                      type="date" 
+                      value={pedido.fechaEntrega}
+                      onChange={(e) => handleInputChange(e, 'fechaEntrega', index)} 
+                    />
+                  ) : (
+                    pedido.fechaEntrega
+                  )}
+                </td>
                 <td className="action-buttons">
                   {mode === 'add-sale' ? (
                     <button className="action-button add" onClick={() => handleAddSaleClick(index)}>
