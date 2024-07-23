@@ -62,7 +62,7 @@
   }
   
   .pago-image-placeholder {
-    background-color: #ddd;
+    background-color: rgb(255, 209, 149);
     width: 50%;
     height: 300px;
     display: flex;

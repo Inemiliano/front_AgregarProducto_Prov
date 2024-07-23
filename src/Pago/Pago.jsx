@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TiArrowBackOutline } from "react-icons/ti";
 import { FaWhatsappSquare } from "react-icons/fa";
 import './Pago.css';
 
 const Pago = () => {
+  const [referenciaData, setReferenciaData] = useState(null);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const data = localStorage.getItem('referenciaData');
+    if (data) {
+      setReferenciaData(JSON.parse(data));
+    }
+  }, []);
 
   const handleBackClick = () => {
     navigate('/MisPedidos'); 
@@ -22,11 +31,22 @@ const Pago = () => {
       </header>
       <main className="pago-main">
         <div className="pago-image-placeholder">
-          <img src="placeholder.png" alt="Referencia de pago" />
+          {referenciaData ? (
+            <div className="referencia-info">
+              <p><strong>Banco:</strong> {referenciaData.nombreBanco}</p>
+              <p><strong>Número de Cuenta:</strong> {referenciaData.numeroCuenta}</p>
+              <p><strong>Titular:</strong> {referenciaData.titular}</p>
+              <p><strong>Clave Interbancaria:</strong> {referenciaData.claveInterbancaria}</p>
+            </div>
+          ) : (
+            <p>No hay referencia guardada</p>
+          )}
         </div>
         <div className="pago-instruction">
           <p>Una vez hecho el pago, manda un mensaje y te atenderemos</p>
-          <FaWhatsappSquare className="pago-whatsapp-icon" />
+          <a href="https://wa.me/tu_numero_telefonico" target="_blank" rel="noopener noreferrer">
+            <FaWhatsappSquare className="pago-whatsapp-icon" />
+          </a>
         </div>
       </main>
     </div>

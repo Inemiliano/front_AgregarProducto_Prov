@@ -4,7 +4,7 @@ import logo from './Assets/logo.jpg';
 import { RiLogoutBoxFill } from "react-icons/ri";
 import { TbShirtSport, TbBasketCog } from "react-icons/tb";
 import { FaEnvelopeOpenText } from "react-icons/fa";
-import { BsGraphUpArrow } from "react-icons/bs";
+import { BsGraphUpArrow, BsFillCreditCard2FrontFill } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom'; 
 
 const Home = ({ onLogout }) => {
@@ -16,7 +16,7 @@ const Home = ({ onLogout }) => {
       navigate('/Login'); 
     }
   };
-  
+
   const handleVerProductos = () => {
     navigate('/VerProductos'); 
   };
@@ -31,6 +31,10 @@ const Home = ({ onLogout }) => {
 
   const handleVerVentas = () => {
     navigate('/VerVentas'); 
+  };
+
+  const handleActualizarReferencia = () => {
+    navigate('/ActualizarReferencia'); 
   };
 
   return (
@@ -69,6 +73,12 @@ const Home = ({ onLogout }) => {
           <button className='item-icon' onClick={handleVerVentas}>
             <BsGraphUpArrow className='icon' />
             <span>Ver ventas</span>
+          </button>
+        </div>
+        <div className="item">
+          <button className='item-icon' onClick={handleActualizarReferencia}>
+            <BsFillCreditCard2FrontFill className='icon' />
+            <span>Actualizar Referencia</span>
           </button>
         </div>
       </div>

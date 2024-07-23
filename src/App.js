@@ -17,6 +17,7 @@ import HomeClient from './Components/HomeClient/HomeClient';
 import DescripcionProducto from './Components/DescripcionProducto/DescripcionProducto';
 import PedidosCliente from './Components/PedidosCliente/PedidosCliente';
 import Pago from './Pago/Pago';
+import ActualizarReferencia from './Components/ActualizarReferencia/ActualizarReferencia'; // Importa el nuevo componente
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/VerPedidos" element={isLoggedIn ? <Pedidos /> : <Navigate to="/Login" replace />} />
                 <Route path="/Pedidos" element={isLoggedIn ? <Pedidos /> : <Navigate to="/Login" replace />} /> 
                 <Route path="/VerVentas" element={isLoggedIn ? <Ventas /> : <Navigate to="/Login" replace />} />
+                <Route path="/ActualizarReferencia" element={isLoggedIn ? <ActualizarReferencia /> : <Navigate to="/Login" replace />} />
                 <Route path="*" element={<Navigate to="/Login" replace />} />
 
                 {/* Rutas para el cliente */}

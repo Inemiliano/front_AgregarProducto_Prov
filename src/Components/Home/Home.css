@@ -72,11 +72,11 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
-  margin-top: 200px; 
+  margin-top: 250px; 
 }
 
 .item {
-  margin: 50px;
+  margin: 25px;
 }
 
 .item-icon {
