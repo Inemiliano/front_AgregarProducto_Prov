@@ -27,10 +27,11 @@ const ProductForm = ({ onProductAdded }) => {
   const [productPrice, setProductPrice] = useState('');
   const [productImage, setProductImage] = useState(null);
   const [productCategory, setProductCategory] = useState('');
+  const [productDescription, setProductDescription] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!productName || !productPrice || !productImage || !productCategory) {
+    if (!productName || !productPrice || !productImage || !productCategory || !productDescription) {
       alert('Por favor, completa todos los campos.');
       return;
     }
@@ -43,6 +44,7 @@ const ProductForm = ({ onProductAdded }) => {
         price: parseFloat(productPrice),
         image: imageUrl,
         category: productCategory,
+        description: productDescription
       };
       addProduct(newProduct);
       onProductAdded();
@@ -50,6 +52,7 @@ const ProductForm = ({ onProductAdded }) => {
       setProductPrice('');
       setProductImage(null);
       setProductCategory('');
+      setProductDescription('');
     };
     reader.readAsDataURL(productImage);
   };
@@ -84,6 +87,14 @@ const ProductForm = ({ onProductAdded }) => {
         <option value="Voleibol">Voleibol</option>
         <option value="Accesorios">Accesorios</option>
       </select>
+      <textarea
+        id="adminProductDescription"
+        className="fixed-size-textarea"
+        placeholder="Descripción del producto"
+        value={productDescription}
+        onChange={(e) => setProductDescription(e.target.value)}
+        required
+      />
       <input
         type="file"
         id="adminProductImage"
@@ -95,6 +106,8 @@ const ProductForm = ({ onProductAdded }) => {
     </form>
   );
 };
+
+
 
 const ProductListAdmin = ({ products, onProductDeleted }) => {
   const { deleteProduct } = useContext(ProductContext);

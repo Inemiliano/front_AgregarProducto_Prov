@@ -22,7 +22,7 @@ const Pago = () => {
       </header>
       <main className="pago-main">
         <div className="pago-image-placeholder">
-          <img src="placeholder.png" alt="Comprobante de pago" />
+          <img src="placeholder.png" alt="Referencia de pago" />
         </div>
         <div className="pago-instruction">
           <p>Una vez hecho el pago, manda un mensaje y te atenderemos</p>

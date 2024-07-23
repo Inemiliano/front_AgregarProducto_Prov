@@ -62,6 +62,12 @@ const DetalleProducto = () => {
         <div className="product-details">
           <label>Articulo</label>
           <input type="text" value={product.name} readOnly />
+          <label>Descripción</label>
+          <textarea 
+            className="fixed-size-textarea" 
+            value={product.description} 
+            readOnly 
+          />
           <label>Talla</label>
           <div className="sizes">
             <button
