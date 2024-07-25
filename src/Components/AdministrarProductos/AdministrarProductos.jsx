@@ -1,14 +1,16 @@
-import React, { useContext, useState, useEffect } from 'react';
+//ok
+import React, { useContext, useState } from 'react';
+import axios from 'axios';
 import './AdministrarProductos.css';
+import { ProductContext } from '../Context/ProductContext'; // Asegúrate de que esta ruta sea correcta
 import { TiHome } from "react-icons/ti";
 import { MdCancel } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
-import { ProductContext } from '../Context/ProductContext';
 import Notification from './Notification';
 
 const Header = () => {
-  const navigate = useNavigate(); 
-  const goToHome = () => navigate('/home'); 
+  const navigate = useNavigate();
+  const goToHome = () => navigate('/home');
 
   return (
     <header className="header">
@@ -29,32 +31,50 @@ const ProductForm = ({ onProductAdded }) => {
   const [productCategory, setProductCategory] = useState('');
   const [productDescription, setProductDescription] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleImageUpload = async (file) => {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const response = await axios.post('http://localhost:3000/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data; // Assuming the backend returns the image URL or relevant info
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('Error uploading image. Please try again.');
+      return null;
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!productName || !productPrice || !productImage || !productCategory || !productDescription) {
       alert('Por favor, completa todos los campos.');
       return;
     }
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const imageUrl = event.target.result;
-      const newProduct = {
-        id: Date.now(),
-        name: productName,
-        price: parseFloat(productPrice),
-        image: imageUrl,
-        category: productCategory,
-        description: productDescription
-      };
-      addProduct(newProduct);
-      onProductAdded();
-      setProductName('');
-      setProductPrice('');
-      setProductImage(null);
-      setProductCategory('');
-      setProductDescription('');
+
+    const imageUrl = await handleImageUpload(productImage);
+    if (!imageUrl) return; // Handle error if image upload failed
+
+    const newProduct = {
+      id: Date.now(),
+      name: productName,
+      price: parseFloat(productPrice),
+      image: imageUrl,
+      category: productCategory,
+      description: productDescription
     };
-    reader.readAsDataURL(productImage);
+
+    addProduct(newProduct);
+    onProductAdded();
+    setProductName('');
+    setProductPrice('');
+    setProductImage(null);
+    setProductCategory('');
+    setProductDescription('');
   };
 
   return (
@@ -107,8 +127,6 @@ const ProductForm = ({ onProductAdded }) => {
   );
 };
 
-
-
 const ProductListAdmin = ({ products, onProductDeleted }) => {
   const { deleteProduct } = useContext(ProductContext);
 
@@ -120,7 +138,7 @@ const ProductListAdmin = ({ products, onProductDeleted }) => {
             <span>{product.name}</span>
             <img src={product.image} alt={product.name} />
           </div>
-          <button className="delete-button" onClick={() => {deleteProduct(product.id); onProductDeleted();}}>
+          <button className="delete-button" onClick={() => { deleteProduct(product.id); onProductDeleted(); }}>
             <MdCancel className="delete-icon" />
             <span className="text">Eliminar</span>
           </button>
@@ -142,10 +160,6 @@ const AdminPanel = () => {
   const handleProductDeleted = () => {
     setNotification('Producto eliminado correctamente');
   };
-
-  useEffect(() => {
-    //  operaciones adicionales al montar el componente si es necesario
-  }, []);
 
   return (
     <div className="App">
@@ -179,3 +193,5 @@ const AdminPanel = () => {
 };
 
 export default AdminPanel;
+
+

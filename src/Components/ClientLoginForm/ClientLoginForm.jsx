@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Asegúrate de haber instalado axios
 import './ClientLoginForm.css';
 import { FaUserCircle, FaUser, FaLock } from "react-icons/fa";
 import clientLogo from './Assets/logo.jpg';
@@ -10,17 +11,25 @@ const ClientLoginForm = ({ onLogin }) => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Recuperar los datos del usuario desde localStorage
-    const storedUserData = localStorage.getItem('userData');
-    const { email: storedEmail, password: storedPassword } = storedUserData ? JSON.parse(storedUserData) : {};
+    try {
+      const response = await axios.post('http://localhost:3000/usersJWT/login', {
+        email: username,
+        pass: password,
+      });
 
-    if (username === storedEmail && password === storedPassword) {
+      const { token, rol_id } = response.data;
+      
+      // Realiza acciones adicionales si es necesario
+      console.log('Token recibido:', token);
+      console.log('Rol ID:', rol_id);
+
       onLogin();
       navigate('/Velasport');
-    } else {
+    } catch (error) {
+      console.error('Error de inicio de sesión:', error);
       setError('Nombre de usuario o contraseña incorrectos');
     }
   };
@@ -68,3 +77,4 @@ const ClientLoginForm = ({ onLogin }) => {
 };
 
 export default ClientLoginForm;
+

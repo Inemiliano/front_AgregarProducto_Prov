@@ -5,6 +5,7 @@ import { BiLogOut } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
 import { ProductContext } from '../Context/ProductContext';
 import { OrderContext } from '../Context/OrderContext';
+import Modal from './modal'; // Importa el componente del modal
 
 const ClientHeader = () => {
   const navigate = useNavigate();
@@ -52,22 +53,11 @@ const ClientNavBar = ({ filterCategory, selectedCategory }) => {
   );
 };
 
-const ClientProductCard = ({ product }) => {
+const ClientProductCard = ({ product, onOrderClick }) => {
   const navigate = useNavigate();
-  const { addOrder } = useContext(OrderContext);
 
   const handleViewClick = () => {
     navigate('/Descripcion', { state: { product } });
-  };
-
-  const handleOrderClick = () => {
-    addOrder({
-      cliente: 'Cliente Anónimo',
-      productos: product.name,
-      cantidad: 1, // Asumimos que se pide una unidad
-      total: product.price
-    });
-    alert(`Has pedido el producto: ${product.name}`);
   };
 
   return (
@@ -80,17 +70,17 @@ const ClientProductCard = ({ product }) => {
         <p>{product.price}</p>
         <div className="client-product-buttons">
           <button className="client-btn-view" onClick={handleViewClick}>Ver</button>
-          <button className="client-btn-order" onClick={handleOrderClick}>Pedir</button>
+          <button className="client-btn-order" onClick={() => onOrderClick(product)}>Pedir</button>
         </div>
       </div>
     </div>
   );
 };
 
-const ClientProductList = ({ products }) => (
+const ClientProductList = ({ products, onOrderClick }) => (
   <div className="client-product-list">
     {products.map(product => (
-      <ClientProductCard key={product.id} product={product} />
+      <ClientProductCard key={product.id} product={product} onOrderClick={onOrderClick} />
     ))}
   </div>
 );
@@ -98,9 +88,28 @@ const ClientProductList = ({ products }) => (
 const HomeClient = () => {
   const { products } = useContext(ProductContext);
   const [selectedCategory, setSelectedCategory] = useState('Fútbol');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const filterCategory = (category) => {
     setSelectedCategory(category);
+  };
+
+  const handleOrderClick = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+  };
+
+  const handleModalSubmit = (orderData) => {
+    // Aquí se puede agregar la lógica para enviar el pedido al backend
+    console.log('Pedido confirmado:', orderData);
+    // Agregar el pedido con OrderContext si es necesario
+    setIsModalOpen(false);
   };
 
   const filteredProducts = products.filter(product => product.category === selectedCategory);
@@ -109,9 +118,18 @@ const HomeClient = () => {
     <div className="client-home-page">
       <ClientHeader />
       <ClientNavBar filterCategory={filterCategory} selectedCategory={selectedCategory} />
-      <ClientProductList products={filteredProducts} />
+      <ClientProductList products={filteredProducts} onOrderClick={handleOrderClick} />
+      {isModalOpen && 
+        <Modal 
+          show={isModalOpen} 
+          onClose={handleModalClose} 
+          onSubmit={handleModalSubmit}
+          product={selectedProduct} // Pasa el producto al modal
+        />
+      }
     </div>
   );
 };
 
 export default HomeClient;
+

@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import { TiHome } from "react-icons/ti";
 import { MdModeEdit } from "react-icons/md";
 import { TbBasketCancel } from "react-icons/tb";
@@ -22,6 +23,19 @@ const Pedidos = () => {
   const { mode, setMode } = useContext(ModeContext);
   const { sales, setSales } = useContext(SalesContext); 
 
+  useEffect(() => {
+    const fetchPedidos = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/pedidos/');
+        setOrders(response.data);
+      } catch (error) {
+        console.error('Error fetching pedidos:', error);
+      }
+    };
+
+    fetchPedidos();
+  }, [setOrders]);
+
   const handleHomeClick = () => {
     navigate('/home'); 
   };
@@ -43,20 +57,65 @@ const Pedidos = () => {
     setEditIndex(index);
   };
 
-  const handleSaveClick = () => {
-    setEditIndex(null);
-    setNotification('Pedido modificado con éxito');
+  const handleSaveClick = async () => {
+    if (editIndex !== null) {
+      const pedidoToUpdate = orders[editIndex];
+      const { idPedido, nombreCliente, apellidoCliente, estado, cantidad, fechaPedido } = pedidoToUpdate;
+
+      // Convertir fecha a formato YYYY-MM-DD
+      const formattedFechaPedido = new Date(fechaPedido).toISOString().split('T')[0]; // '2024-07-18'
+
+      try {
+        const response = await axios.put(`http://localhost:3000/pedidos/actualizar/${idPedido}`, {
+          nombreCliente,
+          apellidoCliente,
+          estado,
+          cantidad,
+          fechaPedido: formattedFechaPedido
+        });
+
+        if (response.status === 200) {
+          // Actualiza la lista de pedidos con los cambios
+          const updatedPedidos = [...orders];
+          updatedPedidos[editIndex] = { ...pedidoToUpdate, fechaPedido: formattedFechaPedido };
+          setOrders(updatedPedidos);
+
+          setEditIndex(null);
+          setNotification('Pedido modificado con éxito');
+        } else {
+          setNotification('Error al modificar el pedido. Por favor, inténtelo de nuevo.');
+        }
+      } catch (error) {
+        console.error('Error al modificar el pedido:', error);
+        setNotification('Error al modificar el pedido. Por favor, inténtelo de nuevo.');
+      }
+    }
   };
 
   const handleCancelClick = (index) => {
     setCancelIndex(index);
   };
 
-  const handleConfirmCancel = () => {
-    const updatedPedidos = orders.filter((_, i) => i !== cancelIndex);
-    setOrders(updatedPedidos);
-    setCancelIndex(null);
-    setNotification('Pedido cancelado con éxito');
+  const handleConfirmCancel = async () => {
+    const pedidoId = orders[cancelIndex].idPedido;
+
+    try {
+      const response = await axios.delete('http://localhost:3000/pedidos/eliminar', {
+        data: { idPedido: pedidoId },
+      });
+
+      if (response.status === 200) {
+        const updatedPedidos = orders.filter((pedido) => pedido.idPedido !== pedidoId);
+        setOrders(updatedPedidos);
+        setCancelIndex(null);
+        setNotification('Pedido cancelado con éxito');
+      } else {
+        setNotification('Error al cancelar el pedido. Por favor, inténtelo de nuevo.');
+      }
+    } catch (error) {
+      console.error('Error al cancelar el pedido:', error);
+      setNotification('Error al cancelar el pedido. Por favor, inténtelo de nuevo.');
+    }
   };
 
   const handleCancelNo = () => {
@@ -65,12 +124,7 @@ const Pedidos = () => {
 
   const handleInputChange = (e, field, index) => {
     const updatedPedidos = [...orders];
-    if (field === 'cantidad') {
-      updatedPedidos[index][field] = parseInt(e.target.value);
-      updatedPedidos[index].total = updatedPedidos[index].cantidad * updatedPedidos[index].precioUnitario;
-    } else {
-      updatedPedidos[index][field] = e.target.value;
-    }
+    updatedPedidos[index][field] = e.target.value;
     setOrders(updatedPedidos);
   };
 
@@ -81,7 +135,7 @@ const Pedidos = () => {
   };
 
   const filteredPedidos = orders.filter(pedido => 
-    pedido.cliente.toLowerCase().includes(searchQuery.toLowerCase())
+    `${pedido.nombreCliente} ${pedido.apellidoCliente}`.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -121,39 +175,38 @@ const Pedidos = () => {
           <thead>
             <tr>
               <th>Id Pedido</th>
-              <th>Cliente</th>
-              <th>Productos</th>
+              <th>Nombre Cliente</th>
+              <th>Apellido Cliente</th>
               <th>Cantidad</th>
-              <th>Total</th>
               <th>Estado</th>
-              <th>Fecha de Entrega</th>
+              <th>Fecha de Pedido</th>
               <th>Acción</th>
             </tr>
           </thead>
           <tbody>
             {filteredPedidos.map((pedido, index) => (
-              <tr key={pedido.id}>
-                <td>{pedido.id}</td>
+              <tr key={pedido.idPedido}>
+                <td>{pedido.idPedido}</td>
                 <td>
                   {editIndex === index ? (
                     <input 
                       type="text" 
-                      value={pedido.cliente}
-                      onChange={(e) => handleInputChange(e, 'cliente', index)} 
+                      value={pedido.nombreCliente}
+                      onChange={(e) => handleInputChange(e, 'nombreCliente', index)} 
                     />
                   ) : (
-                    pedido.cliente
+                    pedido.nombreCliente
                   )}
                 </td>
                 <td>
                   {editIndex === index ? (
                     <input 
                       type="text" 
-                      value={pedido.productos}
-                      onChange={(e) => handleInputChange(e, 'productos', index)} 
+                      value={pedido.apellidoCliente}
+                      onChange={(e) => handleInputChange(e, 'apellidoCliente', index)} 
                     />
                   ) : (
-                    pedido.productos
+                    pedido.apellidoCliente
                   )}
                 </td>
                 <td>
@@ -167,7 +220,6 @@ const Pedidos = () => {
                     pedido.cantidad
                   )}
                 </td>
-                <td>{pedido.total}</td>
                 <td>
                   {editIndex === index ? (
                     <input 
@@ -183,11 +235,11 @@ const Pedidos = () => {
                   {editIndex === index ? (
                     <input 
                       type="date" 
-                      value={pedido.fechaEntrega}
-                      onChange={(e) => handleInputChange(e, 'fechaEntrega', index)} 
+                      value={new Date(pedido.fechaPedido).toISOString().split('T')[0]} // Solo la fecha
+                      onChange={(e) => handleInputChange(e, 'fechaPedido', index)} 
                     />
                   ) : (
-                    pedido.fechaEntrega
+                    pedido.fechaPedido
                   )}
                 </td>
                 <td className="action-buttons">
@@ -202,9 +254,9 @@ const Pedidos = () => {
                         <MdModeEdit className="icon" />
                         <span className="text">Modificar</span>
                       </button>
-                      <button className="action-button delete" onClick={() => handleCancelClick(index)}>
+                      <button className="action-button cancel" onClick={() => handleCancelClick(index)}>
                         <TbBasketCancel className="icon" />
-                        <span className="text">Cancelar</span>
+                        <span className="text">Eliminar</span>
                       </button>
                     </>
                   )}
@@ -214,21 +266,15 @@ const Pedidos = () => {
           </tbody>
         </table>
         {editIndex !== null && (
-          <div className="save-container">
-            <button className="guardar-cambios" onClick={handleSaveClick}>
-              Guardar
-            </button>
-          </div>
+          <button className="save-button" onClick={handleSaveClick}>
+            Guardar Cambios
+          </button>
         )}
         {cancelIndex !== null && (
-          <div className="confirm-cancel-container">
-            <div className="confirm-cancel-box">
-              <p>¿Está seguro de cancelar el pedido?</p>
-              <div className="confirm-cancel-buttons">
-                <button className="confirm-cancel-button confirm-cancel-yes" onClick={handleConfirmCancel}>Sí</button>
-                <button className="confirm-cancel-button confirm-cancel-no" onClick={handleCancelNo}>No</button>
-              </div>
-            </div>
+          <div className="confirm-cancel">
+            <p>¿Estás seguro de que deseas cancelar este pedido?</p>
+            <button onClick={handleConfirmCancel}>Sí</button>
+            <button onClick={handleCancelNo}>No</button>
           </div>
         )}
       </main>
@@ -237,3 +283,7 @@ const Pedidos = () => {
 };
 
 export default Pedidos;
+
+
+
+
