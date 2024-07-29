@@ -1,0 +1,263 @@
+.pedidos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: transparent;
+  position: relative;
+  padding-top: 20px;
+}
+
+.header {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header .home,
+.header .volver {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  color: #e0e0e0;
+  background-color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.header .home:hover,
+.header .volver:hover {
+  background-color: rgb(0, 0, 140);
+}
+
+.header .home-icon,
+.header .volver-icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 150px; 
+}
+
+.search-bar {
+  margin-top: 20px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between; 
+}
+
+.search-bar input {
+  width: 50%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid black;
+}
+
+.search-bar .buscar-cliente {
+  background-color: #34dbdb;
+  color: black;
+  border: none;
+  border-radius:60px;
+  border: 1px solid black;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  margin-right: 400px;
+}
+
+.search-bar .buscar-cliente:hover {
+  background-color: #00a6a6;
+}
+
+.realizar-pedido {
+  padding: 10px 20px;
+  background-color: #00ff40;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 90px;
+  height: 55px; 
+  align-self: flex-end; 
+}
+
+.realizar-pedido:hover {
+  background-color: #41cc00;
+}
+
+.tabla-pedidos {
+  width: 90%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.tabla-pedidos th, .tabla-pedidos td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+}
+
+.tabla-pedidos th {
+  background-color: black;
+  color: white;
+}
+
+.tabla-pedidos td {
+  background-color: white;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px; 
+}
+
+.action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 70px;
+  height: 70px;
+}
+
+.action-button.edit {
+  background-color: yellow;
+  color: black;
+}
+
+.action-button.delete {
+  background-color: red;
+  color: black;
+}
+
+.action-button.add {
+  background-color: green;
+  color: white;
+}
+
+.action-button.edit:hover {
+  background-color: orange;
+}
+
+.action-button.delete:hover {
+  background-color: darkred;
+}
+
+.action-button.add:hover {
+  background-color: darkgreen;
+}
+
+.action-button .icon {
+  font-size: 24px; 
+}
+
+.action-button .text {
+  font-size: 12px; 
+}
+
+.save-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  width: 10%;
+  margin-left: 990px;
+}
+
+.guardar-cambios {
+  padding: 10px 20px;
+  background-color: rgb(0, 255, 0);
+  color: black;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.guardar-cambios:hover {
+  background-color: green;
+}
+
+.confirm-cancel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.confirm-cancel-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.confirm-cancel-box p {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #333;
+}
+
+.confirm-cancel-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.confirm-cancel-button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border: 1px solid black; 
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.confirm-cancel-yes {
+  background-color: #007bff;
+  color: black;
+}
+
+.confirm-cancel-no {
+  background-color: #007bff;
+  color: black;
+}
+
+.confirm-cancel-yes:hover, .confirm-cancel-no:hover {
+  color: aliceblue;
+}

@@ -1,0 +1,140 @@
+.client-login-background {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: url('../Assets/FondoLogin2.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.client-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.client-wrapper {
+  width: 420px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(30px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-radius: 10px;
+  padding: 30px 40px;
+  text-align: center;
+  margin: 150px auto; 
+}
+
+.client-header {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 65px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.client-logo-loginform {
+  width: 100px;
+  height: auto;
+  background-color: transparent;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.client-title {
+  color: white;
+  font-size: 24px;
+  text-align: center;
+}
+
+.client-input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.client-input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: black;
+  padding: 20px 45px 20px 20px;
+}
+
+.client-input-box input::placeholder {
+  color: black;
+}
+
+.client-input-box .client-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: black;
+}
+
+.client-submit-button {
+  width: 100%;
+  height: 45px;
+  background: #1565C0;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: black;
+  font-weight: 700;
+}
+
+.client-user {
+  width: 100px;
+  height: 100px;
+  background: transparent;
+  color: white;
+  margin: 5px 10px;
+}
+
+.client-register-link {
+  text-align: center;
+  margin-top: 20px;
+  color: white;
+}
+
+.client-register-link a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+}
+
+.client-register-link a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.client-register-link a:hover::after {
+  transform: scaleX(1);
+}

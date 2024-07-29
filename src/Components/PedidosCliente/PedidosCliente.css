@@ -1,0 +1,191 @@
+.cliente-pedidos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh; 
+  background: linear-gradient(to bottom, rgb(150, 255, 255), rgb(79, 255, 196));
+  color: black;
+}
+
+.cliente-pedidos-header {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.cliente-pedidos-back {
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 50px;
+  color: #e0e0e0;
+  background-color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cliente-pedidos-back:hover {
+  background-color: rgb(0, 0, 140);
+}
+
+.cliente-pedidos-back-icon {
+  font-size: 24px;
+  margin-right: 5px;
+}
+
+.cliente-pedidos-title {
+  color: white;
+  font-size: 24px;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cliente-pedidos-main {
+  margin-top: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cliente-pedido-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid black;
+  margin: 20px 0;
+  padding: 20px;
+  width: 80%;
+}
+
+.cliente-pedido-image img {
+  width: 100px;
+  height: auto;
+}
+
+.cliente-pedido-info {
+  flex: 2;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.cliente-pedido-quantity {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.cliente-pedido-quantity input {
+  width: 50px;
+  text-align: center;
+}
+
+.cliente-pedido-total {
+  width: 100px;
+  text-align: center;
+  flex: 1;
+}
+
+.cliente-pedidos-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 80%;
+  margin: 20px 0;
+}
+
+.cliente-pagar-button {
+  padding: 15px 0px;
+  background-color: #00ff40;
+  color: black;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 50px;
+  width: 10%;
+}
+
+.cliente-pagar-button:hover {
+  background-color: #41cc00;
+}
+
+.cliente-grand-total {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.cliente-pedido-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid black;
+  margin: 20px 0;
+  padding: 20px;
+  width: 80%;
+  position: relative;
+  background-color: white;
+}
+
+.cliente-pedido-delete {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}
+
+.cliente-delete-icon {
+  font-size: 24px;
+  color: red;
+}
+
+.cliente-message-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.cliente-message-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cliente-message-button {
+  background-color: rgb(0, 187, 250);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.cliente-message-button:hover {
+  background-color: blue;
+}
+
+
