@@ -1,0 +1,148 @@
+.client-header-home {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 10px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: top 0.3s;
+  }
+  
+  .client-logo-home {
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+  }
+  
+  .client-header-left-home,
+  .client-header-right-home {
+    display: flex;
+    align-items: center;
+  }
+  
+  .client-header-right-home {
+    position: absolute;
+    right: 20px;
+  }
+  
+  .client-logout {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+    color: #e0e0e0;
+    background-color: black;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .client-logout:hover {
+    background-color: red;
+  }
+  
+  .client-logout-icon {
+    font-size: 50px; 
+    margin-right: 8px; 
+  }
+  
+  .client-navbar {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    top: 100px;
+    width: 100%;
+    z-index: 999;
+  }
+  
+  .client-nav-tabs {
+    display: flex;
+  }
+  
+  .client-nav-tabs button {
+    background-color: #1565C0;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 80px;
+    margin: 0 10px;
+    cursor: pointer;
+    color: black;
+    transition: background-color 0.3s;
+  }
+  
+  .client-nav-tabs button:hover {
+    background-color: white;
+  }
+  
+  .client-product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 60px;
+    margin-top: 150px;
+  }
+  
+  .client-product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .client-product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .client-product-image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .client-product-info {
+    margin-top: 10px;
+  }
+  
+  .client-product-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  
+  .client-product-buttons button {
+    padding: 10px 25px;
+    margin: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .client-btn-view {
+    background-color: #00bfff;
+    color: black;
+  }
+  
+  .client-btn-view:hover {
+    background-color: #007acc;
+  }
+  
+  .client-btn-order {
+    background-color: #32cd32;
+    color: black;
+  }
+  
+  .client-btn-order:hover {
+    background-color: #228b22;
+  }
+  
