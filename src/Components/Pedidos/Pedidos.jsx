@@ -13,6 +13,24 @@ import Notification from './Notification';
 import { ModeContext } from '../Context/ModeContext';
 import { SalesContext } from '../Context/SalesContext'; 
 
+function formatDateToYYYYDDMM(isoString) {
+  // Crear un objeto Date a partir de la cadena ISO
+  const date = new Date(isoString);
+
+  // Obtener el año
+  const year = date.getFullYear();
+
+  // Obtener el día (con ajuste para asegurarse de que sea de dos dígitos)
+  const day = String(date.getDate()).padStart(2, '0');
+
+  // Obtener el mes (con ajuste para asegurarse de que sea de dos dígitos)
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses son de 0 a 11, por eso se suma 1
+
+  // Formatear la fecha en YYYY/DD/MM
+  return `${year}-${month}-${day}`;
+}
+
+
 const Pedidos = () => {
   const navigate = useNavigate();
   const { orders, setOrders } = useContext(OrderContext);
@@ -187,10 +205,32 @@ const Pedidos = () => {
     setOrders(updatedPedidos);
   };
 
-  const handleAddSaleClick = (index) => {
-    const newSale = orders[index];
-    setSales([...sales, newSale]);
-    setNotification('Venta agregada con éxito');
+  const handleAddSaleClick = async (index, pedido) => {
+    console.log(pedido);
+    let fecha = formatDateToYYYYDDMM(pedido.fechaPedido);    
+    const addVenta = await fetch("http://localhost:4000/ventas/agregar", {
+      method: "POST",
+      headers: {
+        'Content-Type': "application/json",
+      },
+      body: JSON.stringify({
+        pedido_id: pedido.idPedido,
+        cantidad: pedido.cantidad,
+        fecha: fecha,
+        total: pedido.total
+      })
+    });
+
+    if(addVenta.ok) {
+      const newSale = orders[index];
+      setSales([...sales, newSale]);
+      setNotification('Venta agregada con éxito');
+    } else {
+      alert("Ocurrio un error");
+      console.error(addVenta);
+    };
+
+    
   };
 
   const filteredPedidos = orders.filter(pedido => 
@@ -314,7 +354,7 @@ const Pedidos = () => {
                       <>
                         <button onClick={() => handleEditClick(index)}><MdModeEdit /></button>
                         <button onClick={() => handleCancelClick(index)}><TbBasketCancel /></button>
-                        <button onClick={() => handleAddSaleClick(index)}>Agregar Venta</button>
+                        <button onClick={() => handleAddSaleClick(index, pedido)}>Agregar Venta</button>
                       </>
                     )}
                   </td>
