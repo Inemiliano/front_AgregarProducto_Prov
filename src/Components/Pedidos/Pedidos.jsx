@@ -44,7 +44,7 @@ const Pedidos = () => {
   useEffect(() => {
     const fetchPedidos = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/pedidos/');
+        const response = await axios.get('https://velasportapi.integrador.xyz/pedidos/');
         setOrders(response.data);
       } catch (error) {
         console.error('Error fetching pedidos:', error);
@@ -90,7 +90,7 @@ const Pedidos = () => {
       const total = (!isNaN(cantidadNum) && !isNaN(precioNum)) ? (cantidadNum * precioNum).toFixed(2) : '0.00';
 
       try {
-        const response = await axios.put(`http://localhost:4000/pedidos/actualizar/${idPedido}`, {
+        const response = await axios.put(`https://velasportapi.integrador.xyz/pedidos/actualizar/${idPedido}`, {
           nombreCliente,
           apellidoCliente,
           estado,
@@ -139,7 +139,7 @@ const Pedidos = () => {
     console.log('Datos de la nueva venta:', newVenta);
 
     try {
-      const response = await axios.post('http://localhost:4000/ventas/agregar', newVenta, {
+      const response = await axios.post('https://velasportapi.integrador.xyz/ventas/agregar', newVenta, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -169,7 +169,7 @@ const Pedidos = () => {
     const pedidoId = orders[cancelIndex].idPedido;
 
     try {
-      const response = await axios.delete('http://localhost:4000/pedidos/eliminar', {
+      const response = await axios.delete('https://velasportapi.integrador.xyz/pedidos/eliminar', {
         data: { idPedido: pedidoId },
       });
 
@@ -208,7 +208,7 @@ const Pedidos = () => {
   const handleAddSaleClick = async (index, pedido) => {
     console.log(pedido);
     let fecha = formatDateToYYYYDDMM(pedido.fechaPedido);    
-    const addVenta = await fetch("http://localhost:4000/ventas/agregar", {
+    const addVenta = await fetch("https://velasportapi.integrador.xyz/ventas/agregar", {
       method: "POST",
       headers: {
         'Content-Type': "application/json",

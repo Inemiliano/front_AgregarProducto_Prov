@@ -17,7 +17,7 @@ export const ProductProvider = ({ children }) => {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/products');
+            const response = await axios.get('https://velasportapi.integrador.xyz/products');
             const productsWithEncodedUrls = response.data.map(product => ({
                 ...product,
                 image: `http://localhost:4000/uploads/${encodeURIComponent(product.image)}`

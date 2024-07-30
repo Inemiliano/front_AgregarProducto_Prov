@@ -32,7 +32,7 @@ const Modal = ({ show, onClose, onSubmit, product }) => {
     };
 
     try {
-      const response = await axios.post('http://localhost:4000/pedidos/agregar', orderData);
+      const response = await axios.post('https://velasportapi.integrador.xyz/pedidos/agregar', orderData);
       console.log('Order successfully sent:', response.data);
 
       alert('Pedido agregado correctamente.');

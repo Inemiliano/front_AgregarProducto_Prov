@@ -33,11 +33,11 @@ const RegistroUser = () => {
       apellidoP,
       apellidoM,
       nombre,
-      rol_id: 1
+      rol_id: 5
     };
 
     try {
-      const response = await axios.post('http://localhost:4000/users/agregar', userData, {
+      const response = await axios.post('https://velasportapi.integrador.xyz/users/agregar', userData, {
         headers: {
           'Content-Type': 'application/json'
         }

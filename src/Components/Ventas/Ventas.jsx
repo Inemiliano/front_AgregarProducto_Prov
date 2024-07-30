@@ -34,7 +34,7 @@ const Ventas = () => {
   useEffect(() => {
     const fetchSales = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/ventas/');
+        const response = await axios.get('https://velasportapi.integrador.xyz/ventas/');
         setSales(response.data);
       } catch (error) {
         console.error('Error fetching sales data:', error);
@@ -60,7 +60,7 @@ const Ventas = () => {
       const { pedido_id, cantidad, fecha, total } = saleToUpdate;
 
       try {
-        const response = await axios.put(`http://localhost:4000/ventas/actualizar/${pedido_id}`, {
+        const response = await axios.put(`https://velasportapi.integrador.xyz/ventas/actualizar/${pedido_id}`, {
           pedido_id,
           cantidad,
           fecha,

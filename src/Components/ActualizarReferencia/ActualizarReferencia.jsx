@@ -25,11 +25,11 @@ const ActualizarReferencia = () => {
   
 
   const handleSave = async () => {
-    const referenciaData = { nombreBanco, numCuenta: numeroCuenta, duenoCuenta: titular, clabeBanco: claveInterbancaria };
+    const referenciaData = { nombreBanco, numCuenta: numeroCuenta, duenoCuenta: titular, debeBanco: claveInterbancaria };
     localStorage.setItem('referenciaData', JSON.stringify(referenciaData));
 
     try {
-      const response = await axios.post('http://localhost:4000/api/datosTransferencia/agregar', referenciaData);
+      const response = await axios.post('https://velasportapi.integrador.xyz/datosTransferencia/agregar', referenciaData);
       alert('Datos guardados correctamente en el servidor');
     } catch (error) {
       console.error('Error al guardar los datos en el servidor:', error);

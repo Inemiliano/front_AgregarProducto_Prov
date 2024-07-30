@@ -44,7 +44,7 @@ const ProductForm = ({ onProductAdded }) => {
     formData.append('image', file);
 
     try {
-        const response = await axios.post('http://localhost:4000/upload', formData, {
+        const response = await axios.post('https://velasportapi.integrador.xyz/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },

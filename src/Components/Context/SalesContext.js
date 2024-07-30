@@ -9,7 +9,7 @@ export const SalesProvider = ({ children }) => {
   // Función para cargar las ventas desde el servidor
   const fetchSales = async () => {
     try {
-      const response = await fetch('http://localhost:4000/api/ventas');
+      const response = await fetch('https://velasportapi.integrador.xyz/ventas');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
