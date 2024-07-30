@@ -72,7 +72,7 @@
 }
 
 .product-image img {
-    width: 80%; /* tamaño de la imagen según sea necesario */
+    width: 80%; 
     max-width: 400px;
 }
 
@@ -117,7 +117,7 @@
 .product-details .order-button {
     padding: 10px 25px;
     margin-top: 20px;
-    background-color: #00ff40;
+    background-color: #00bfff;
     color: black;
     border: none;
     cursor: pointer;
@@ -125,7 +125,7 @@
 }
 
 .product-details .order-button:hover {
-    background-color: #41cc00;
+    background-color: #007acc;
 }
 
 .sizes {

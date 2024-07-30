@@ -76,8 +76,8 @@
 #referenceForm button {
   padding: 12px 25px;
   margin-top: 20px;
-  background-color: green;
-  color: white;
+  background-color: #00bfff;
+  color: black;
   border-radius: 5px;
   border: none;
   font-size: 16px;
@@ -86,5 +86,5 @@
 }
 
 #referenceForm button:hover {
-  background-color: rgb(4, 184, 4);
+  background-color: #007acc;
 }

@@ -72,7 +72,7 @@
 
 .realizar-pedido {
   padding: 10px 20px;
-  background-color: #00ff40;
+  background-color: #00bfff;
   color: black;
   border: none;
   border-radius: 10px;
@@ -84,7 +84,7 @@
 }
 
 .realizar-pedido:hover {
-  background-color: #41cc00;
+  background-color: #007acc;
 }
 
 .tabla-pedidos {

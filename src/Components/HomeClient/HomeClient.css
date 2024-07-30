@@ -69,20 +69,15 @@
   }
   
   .client-nav-tabs button {
-    background-color: #1565C0;
+    background-color: #007acc;
     border: none;
     border-radius: 5px;
     padding: 10px 80px;
     margin: 0 10px;
     cursor: pointer;
     color: black;
-    transition: background-color 0.3s;
   }
-  
-  .client-nav-tabs button:hover {
-    background-color: white;
-  }
-  
+   
   .client-product-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -138,11 +133,11 @@
   }
   
   .client-btn-order {
-    background-color: #32cd32;
+    background-color: green;
     color: black;
   }
   
   .client-btn-order:hover {
-    background-color: #228b22;
+    background-color: darkgreen;
   }
   

@@ -74,7 +74,7 @@ h2 {
 #addProductForm button {
   padding: 10px 25px;
   margin-top: 10px;
-  background-color: #1565C0;
+  background-color: #00bfff;
   color: black;
   border-radius: 10px ;
   cursor: pointer;
@@ -82,7 +82,7 @@ h2 {
 }
 
 #addProductForm button:hover {
-  background-color: #00bfff;
+  background-color: #007acc;
 }
 
 #productListAdmin {

@@ -72,39 +72,34 @@
     color: black;
   }
   
- /* Estilos para la tabla de ventas */
 .sales-table {
   width: 100%;
   border-collapse: collapse;
   background-color: white; 
 }
 
-/* Estilos para las cabeceras de columna */
 .sales-table th {
-  background-color: black; /* Fondo negro para todas las cabeceras */
-  color: white; /* Texto blanco */
+  background-color: black; 
+  color: white; 
   padding: 10px;
   text-align: center;
   border: 1px solid black;
 }
 
-/* Estilos para las filas de datos */
 .sales-table td {
   padding: 10px;
   text-align: center;
   border: 1px solid black;
 }
 
-/* Estilos para las filas de la tabla */
 .sales-table tr:nth-child(even) {
-  background-color: #f9f9f9; /* Fondo gris claro para las filas pares */
+  background-color: #f9f9f9; 
 }
 
 .sales-table tr:nth-child(odd) {
-  background-color: #ffffff; /* Fondo blanco para las filas impares */
+  background-color: #ffffff; 
 }
 
-/* Estilos para los botones de acción */
 .action-button.save {
   background-color: green;
   color: white;
