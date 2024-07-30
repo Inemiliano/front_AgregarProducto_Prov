@@ -1,4 +1,3 @@
-/* Ventas.css */
 .header {
     background-color: black;
     display: flex;
@@ -73,61 +72,159 @@
     color: black;
   }
   
-  .sales-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white; 
-  }
-  
-  .sales-table th,
-  .sales-table td {
-    border: 1px solid black; 
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .product-header {
-    background-color: orange;
-  }
-  
-  .quantity-header {
-    background-color: yellow;
-  }
-  
-  .total-header {
-    background-color: red;
-  }
-  
-  .action-header {
-    background-color: grey;
-  }
-  
-  .edit-action {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-  
-  .edit-icon {
-    font-size: 32px; 
-    margin-bottom: 5px; 
-  }
-  
-  .edit-action span {
-    font-size: 14px; 
-  }
-  
-  .action-button.save {
-    background-color: green;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+ /* Estilos para la tabla de ventas */
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white; 
+}
+
+/* Estilos para las cabeceras de columna */
+.sales-table th {
+  background-color: black; /* Fondo negro para todas las cabeceras */
+  color: white; /* Texto blanco */
+  padding: 10px;
+  text-align: center;
+  border: 1px solid black;
+}
+
+/* Estilos para las filas de datos */
+.sales-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid black;
+}
+
+/* Estilos para las filas de la tabla */
+.sales-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Fondo gris claro para las filas pares */
+}
+
+.sales-table tr:nth-child(odd) {
+  background-color: #ffffff; /* Fondo blanco para las filas impares */
+}
+
+/* Estilos para los botones de acción */
+.action-button.save {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.action-button.save:hover {
+  background-color: darkgreen;
+}
+
+.save-icon {
+  font-size: 32px; 
+  margin-bottom: 5px; 
+}
+
+.header {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header h1 {
+  color: white;
+  flex-grow: 1;
+  text-align: center;
+  margin: 0;
+}
+
+.header .home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  color: #e0e0e0;
+  background-color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.header .home:hover {
+  background-color: rgb(0, 0, 140);
+}
+
+.header .home-icon {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+.container {
+  padding: 20px;
+  margin-top: 150px;
+}
+
+.sales-table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.add-sale {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: green;
+  cursor: pointer;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.add-icon {
+  font-size: 64px; 
+  margin-bottom: 5px; 
+}
+
+.add-sale span {
+  font-size: 14px; 
+  color: black;
+}
+
+.edit-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.edit-icon {
+  font-size: 32px; 
+  margin-bottom: 5px; 
+}
+
+.edit-action span {
+  font-size: 14px; 
+}
+
+ .action-button.save {
+   background-color: green;
+   color: white;
+   border: none;
+   padding: 10px 20px;
+   cursor: pointer;
+   font-size: 16px;
+   border-radius: 5px;
+   transition: background-color 0.3s;
 }
 
 .action-button.save:hover {

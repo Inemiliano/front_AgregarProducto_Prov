@@ -207,8 +207,8 @@ const Pedidos = () => {
         </button>
         <h1>Pedidos</h1>
         {mode === 'add-sale' && (
-          <button className="back" onClick={handleBackClick}>
-            <IoArrowBackCircle className="back-icon" />
+          <button className="volver" onClick={handleBackClick}>
+            <IoArrowBackCircle className="volver-icon" />
             <span>Volver</span>
           </button>
         )}
@@ -222,117 +222,137 @@ const Pedidos = () => {
               value={searchQuery} 
               onChange={(e) => setSearchQuery(e.target.value)} 
             />
-            <button onClick={handleSearchClick}>
-              <IoMdSearch className="search-icon" />
-            </button>
             <button className="realizar-pedido" onClick={handleRealizarPedidoClick}>
               Realizar Pedido
             </button>
           </div>
         )}
-        <table className="tabla-pedidos">
-          <thead>
-            <tr>
-              <th>Id Pedido</th>
-              <th>Nombre Cliente</th>
-              <th>Apellido Cliente</th>
-              <th>Cantidad</th>
-              <th>Estado</th>
-              <th>Fecha de Pedido</th>
-              <th>Total</th> {/* Nueva columna para el total */}
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredPedidos.length > 0 ? (
-              filteredPedidos.map((pedido, index) => (
-                <tr key={pedido.idPedido}>
-                  <td>{pedido.idPedido}</td>
-                  <td>
-                    {editIndex === index ? (
-                      <input 
-                        type="text" 
-                        value={pedido.nombreCliente} 
-                        onChange={(e) => handleInputChange(e, 'nombreCliente', index)} 
-                      />
-                    ) : (
-                      pedido.nombreCliente
-                    )}
-                  </td>
-                  <td>
-                    {editIndex === index ? (
-                      <input 
-                        type="text" 
-                        value={pedido.apellidoCliente} 
-                        onChange={(e) => handleInputChange(e, 'apellidoCliente', index)} 
-                      />
-                    ) : (
-                      pedido.apellidoCliente
-                    )}
-                  </td>
-                  <td>
-                    {editIndex === index ? (
-                      <input 
-                        type="number" 
-                        value={pedido.cantidad} 
-                        onChange={(e) => handleInputChange(e, 'cantidad', index)} 
-                      />
-                    ) : (
-                      pedido.cantidad
-                    )}
-                  </td>
-                  <td>
-                    {editIndex === index ? (
-                      <input 
-                        type="text" 
-                        value={pedido.estado} 
-                        onChange={(e) => handleInputChange(e, 'estado', index)} 
-                      />
-                    ) : (
-                      pedido.estado
-                    )}
-                  </td>
-                  <td>
-                    {editIndex === index ? (
-                      <input 
-                        type="date" 
-                        value={pedido.fechaPedido} 
-                        onChange={(e) => handleInputChange(e, 'fechaPedido', index)} 
-                      />
-                    ) : (
-                      pedido.fechaPedido
-                    )}
-                  </td>
-                  <td>{pedido.total}</td>
-                  <td>
-                    {editIndex === index ? (
-                      <>
-                        <button onClick={handleSaveClick}>Guardar</button>
-                        <button onClick={() => setEditIndex(null)}>Cancelar</button>
-                      </>
-                    ) : (
-                      <>
-                        <button onClick={() => handleEditClick(index)}><MdModeEdit /></button>
-                        <button onClick={() => handleCancelClick(index)}><TbBasketCancel /></button>
-                        <button onClick={() => handleAddSaleClick(index)}>Agregar Venta</button>
-                      </>
-                    )}
-                  </td>
-                </tr>
-              ))
+<table className="tabla-pedidos">
+  <thead>
+    <tr>
+      <th>Id Pedido</th>
+      <th>Nombre Cliente</th>
+      <th>Apellido Cliente</th>
+      <th>Cantidad</th>
+      <th>Estado</th>
+      <th>Fecha de Pedido</th>
+      <th>Total</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredPedidos.length > 0 ? (
+      filteredPedidos.map((pedido, index) => (
+        <tr key={pedido.idPedido} className="fila-pedido">
+          <td className="celda-pedido">{pedido.idPedido}</td>
+          <td className="celda-pedido">
+            {editIndex === index ? (
+              <input 
+                type="text" 
+                value={pedido.nombreCliente} 
+                onChange={(e) => handleInputChange(e, 'nombreCliente', index)} 
+                className="input-pedido"
+              />
             ) : (
-              <tr>
-                <td colSpan="8">No hay pedidos registrados.</td>
-              </tr>
+              pedido.nombreCliente
             )}
-          </tbody>
-        </table>
+          </td>
+          <td className="celda-pedido">
+            {editIndex === index ? (
+              <input 
+                type="text" 
+                value={pedido.apellidoCliente} 
+                onChange={(e) => handleInputChange(e, 'apellidoCliente', index)} 
+                className="input-pedido"
+              />
+            ) : (
+              pedido.apellidoCliente
+            )}
+          </td>
+          <td className="celda-pedido">
+            {editIndex === index ? (
+              <input 
+                type="number" 
+                value={pedido.cantidad} 
+                onChange={(e) => handleInputChange(e, 'cantidad', index)} 
+                className="input-pedido"
+              />
+            ) : (
+              pedido.cantidad
+            )}
+          </td>
+          <td className="celda-pedido">
+            {editIndex === index ? (
+              <input 
+                type="text" 
+                value={pedido.estado} 
+                onChange={(e) => handleInputChange(e, 'estado', index)} 
+                className="input-pedido"
+              />
+            ) : (
+              pedido.estado
+            )}
+          </td>
+          <td className="celda-pedido">
+            {editIndex === index ? (
+              <input 
+                type="date" 
+                value={pedido.fechaPedido} 
+                onChange={(e) => handleInputChange(e, 'fechaPedido', index)} 
+                className="input-pedido"
+              />
+            ) : (
+              pedido.fechaPedido
+            )}
+          </td>
+          <td className="celda-pedido">{pedido.total}</td>
+          <td className="action-buttons">
+            {editIndex === index ? (
+              <>
+                <button onClick={handleSaveClick} className="guardar-cambios">
+                  Guardar
+                </button>
+                <button onClick={() => setEditIndex(null)} className="cancelar-cambios">
+                  Cancelar
+                </button>
+              </>
+            ) : (
+              <>
+                <button onClick={() => handleEditClick(index)} className="action-button edit">
+                  <MdModeEdit className="icon" />
+                  <span className="text">Editar</span>
+                </button>
+                <button onClick={() => handleCancelClick(index)} className="action-button delete">
+                  <TbBasketCancel className="icon" />
+                  <span className="text">Cancelar</span>
+                </button>
+                <button onClick={() => handleAddSaleClick(index)} className="action-button add">
+                  <FaPlusCircle className="icon" />
+                  <span className="text">Agregar</span>
+                </button>
+              </>
+            )}
+          </td>
+        </tr>
+      ))
+    ) : (
+      <tr>
+        <td colSpan="8" className="no-pedidos">No hay pedidos registrados.</td>
+      </tr>
+    )}
+  </tbody>
+</table>
+
       </main>
       {cancelIndex !== null && (
-        <div className="confirmation-dialog">
-          <p>¿Estás seguro de que deseas cancelar este pedido?</p>
-          <button onClick={handleConfirmCancel}>Sí</button>
-          <button onClick={handleCancelNo}>No</button>
+        <div className="confirm-cancel-container">
+          <div className="confirm-cancel-box">
+            <p>¿Estás seguro de que deseas cancelar este pedido?</p>
+            <div className="confirm-cancel-buttons">
+              <button onClick={handleConfirmCancel} className="confirm-cancel-button confirm-cancel-yes">Sí</button>
+              <button onClick={handleCancelNo} className="confirm-cancel-button confirm-cancel-no">No</button>
+            </div>
+          </div>
         </div>
       )}
     </div>
