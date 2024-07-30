@@ -66,11 +66,6 @@
   margin: 0 41px;
   cursor: pointer;
   color: black;
-  transition: background-color 0.3s;
-}
-
-.nav-tabs button:hover {
-  background-color: white;
 }
 
 .product-list {
