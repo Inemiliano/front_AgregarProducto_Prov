@@ -108,7 +108,8 @@ const HomeClient = () => {
   };
 
   const handleModalSubmit = async (orderData) => {
-    try {
+    console.log(orderData)
+    /* try {
       const response = await axios.post('http://localhost:4000/pedidos/agregar', orderData);
       console.log('Order successfully sent:', response.data);
 
@@ -118,7 +119,8 @@ const HomeClient = () => {
     } catch (error) {
       console.error('Error sending order:', error);
       alert('Hubo un error al agregar el pedido. Por favor, intenta de nuevo.');
-    }
+    } */
+   setIsModalOpen(false);
   };
 
   const filteredProducts = products.filter(product => product.category === selectedCategory);

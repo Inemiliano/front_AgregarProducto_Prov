@@ -41,7 +41,7 @@ const Ventas = () => {
         setNotification('Error al cargar las ventas. Por favor, inténtelo de nuevo.');
       }
     };
-
+    
     fetchSales();
   }, [setSales]);
 
@@ -122,17 +122,7 @@ const Ventas = () => {
               {sales.length > 0 ? (
                 sales.map((sale, index) => (
                   <tr key={index}>
-                    <td>
-                      {editIndex === index ? (
-                        <input
-                          type="text"
-                          value={sale.pedido_id || ''}
-                          onChange={(e) => handleInputChange(e, 'pedido_id', index)}
-                        />
-                      ) : (
-                        sale.pedido_id
-                      )}
-                    </td>
+                    <td>{sale.pedido_id}</td>
                     <td>
                       {editIndex === index ? (
                         <input
