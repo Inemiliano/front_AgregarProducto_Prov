@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ActualizarReferencia.css';
 import { TiHome } from "react-icons/ti";
-import axios from 'axios';  // Asegúrate de tener axios instalado: npm install axios
+import axios from 'axios';  
 
 const ActualizarReferencia = () => {
   const [nombreBanco, setNombreBanco] = useState('');

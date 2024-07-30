@@ -46,7 +46,6 @@ const ClientNavBar = ({ filterCategory, selectedCategory }) => {
         <button onClick={() => handleNavClick('Fútbol')} className={selectedCategory === 'Fútbol' ? 'client-active' : ''}>Fútbol</button>
         <button onClick={() => handleNavClick('Basquetbol')} className={selectedCategory === 'Basquetbol' ? 'client-active' : ''}>Basquetbol</button>
         <button onClick={() => handleNavClick('Voleibol')} className={selectedCategory === 'Voleibol' ? 'client-active' : ''}>Voleibol</button>
-        <button onClick={() => handleNavClick('Accesorios')} className={selectedCategory === 'Accesorios' ? 'client-active' : ''}>Accesorios</button>
         <button onClick={() => handleNavClick('Mis pedidos')} className={selectedCategory === 'Mis pedidos' ? 'client-active' : ''}>Mis pedidos</button>
       </div>
     </nav>

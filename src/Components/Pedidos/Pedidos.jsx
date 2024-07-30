@@ -64,9 +64,12 @@ const Pedidos = () => {
 
       // Asegurarse de que fechaPedido es una fecha válida
       const parsedFechaPedido = new Date(fechaPedido);
-      const formattedFechaPedido = isNaN(parsedFechaPedido.getTime()) ? new Date().toISOString().split('T')[0] : parsedFechaPedido.toISOString().split('T')[0]; // '2024-07-18'
+      const formattedFechaPedido = isNaN(parsedFechaPedido.getTime()) ? new Date().toISOString().split('T')[0] : parsedFechaPedido.toISOString().split('T')[0];
 
-      const total = Number(cantidad) * Number(precio); // Recalcular el total y asegurarse de que es un número
+      // Verifica que cantidad y precio sean números válidos
+      const cantidadNum = parseFloat(cantidad);
+      const precioNum = parseFloat(precio);
+      const total = (!isNaN(cantidadNum) && !isNaN(precioNum)) ? (cantidadNum * precioNum).toFixed(2) : '0.00';
 
       try {
         const response = await axios.put(`http://localhost:4000/pedidos/actualizar/${idPedido}`, {
@@ -102,11 +105,17 @@ const Pedidos = () => {
   };
 
   const agregarVenta = async (pedido) => {
+    if (!pedido || !pedido.idPedido || !pedido.cantidad || !pedido.fechaPedido || !pedido.total) {
+      console.error('Datos incompletos del pedido:', pedido);
+      setNotification('Error al agregar la venta. Datos del pedido incompletos.');
+      return;
+    }
+
     const newVenta = {
       pedido_id: pedido.idPedido,
-      cantidad: pedido.cantidad,
+      cantidad: parseInt(pedido.cantidad, 10),
       fecha: new Date(pedido.fechaPedido).toISOString().split('T')[0], // Solo la fecha
-      total: pedido.total
+      total: parseFloat(pedido.total).toFixed(2) // Asegúrate de que sea un número
     };
 
     console.log('Datos de la nueva venta:', newVenta);
@@ -167,6 +176,14 @@ const Pedidos = () => {
   const handleInputChange = (e, field, index) => {
     const updatedPedidos = [...orders];
     updatedPedidos[index][field] = e.target.value;
+
+    if (field === 'cantidad' || field === 'precio') {
+      // Recalcular el total si cambia cantidad o precio
+      const cantidad = parseFloat(updatedPedidos[index].cantidad) || 0;
+      const precio = parseFloat(updatedPedidos[index].precio) || 0;
+      updatedPedidos[index].total = (cantidad * precio).toFixed(2);
+    }
+
     setOrders(updatedPedidos);
   };
 
@@ -223,77 +240,103 @@ const Pedidos = () => {
               <th>Estado</th>
               <th>Fecha de Pedido</th>
               <th>Total</th> {/* Nueva columna para el total */}
-              <th>Acción</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {filteredPedidos.map((pedido, index) => {
-              // Verificar que fechaPedido sea una fecha válida
-              const parsedFechaPedido = new Date(pedido.fechaPedido);
-              const displayFechaPedido = isNaN(parsedFechaPedido.getTime()) 
-                ? '' 
-                : parsedFechaPedido.toISOString().split('T')[0];
-
-              return (
+            {filteredPedidos.length > 0 ? (
+              filteredPedidos.map((pedido, index) => (
                 <tr key={pedido.idPedido}>
                   <td>{pedido.idPedido}</td>
-                  <td>{pedido.nombreCliente}</td>
-                  <td>{pedido.apellidoCliente}</td>
                   <td>
-                    {editIndex === index
-                      ? <input type="number" value={pedido.cantidad} onChange={(e) => handleInputChange(e, 'cantidad', index)} />
-                      : pedido.cantidad}
+                    {editIndex === index ? (
+                      <input 
+                        type="text" 
+                        value={pedido.nombreCliente} 
+                        onChange={(e) => handleInputChange(e, 'nombreCliente', index)} 
+                      />
+                    ) : (
+                      pedido.nombreCliente
+                    )}
                   </td>
                   <td>
-                    {editIndex === index
-                      ? <select value={pedido.estado} onChange={(e) => handleInputChange(e, 'estado', index)}>
-                          <option value="pendiente">Pendiente</option>
-                          <option value="enviado">Enviado</option>
-                          <option value="entregado">Entregado</option>
-                          <option value="cancelado">Cancelado</option>
-                        </select>
-                      : pedido.estado}
+                    {editIndex === index ? (
+                      <input 
+                        type="text" 
+                        value={pedido.apellidoCliente} 
+                        onChange={(e) => handleInputChange(e, 'apellidoCliente', index)} 
+                      />
+                    ) : (
+                      pedido.apellidoCliente
+                    )}
                   </td>
                   <td>
-                    {editIndex === index
-                      ? <input type="date" value={displayFechaPedido} onChange={(e) => handleInputChange(e, 'fechaPedido', index)} />
-                      : displayFechaPedido}
+                    {editIndex === index ? (
+                      <input 
+                        type="number" 
+                        value={pedido.cantidad} 
+                        onChange={(e) => handleInputChange(e, 'cantidad', index)} 
+                      />
+                    ) : (
+                      pedido.cantidad
+                    )}
                   </td>
                   <td>
-                    {(Number(pedido.total) || 0).toFixed(2)}
+                    {editIndex === index ? (
+                      <input 
+                        type="text" 
+                        value={pedido.estado} 
+                        onChange={(e) => handleInputChange(e, 'estado', index)} 
+                      />
+                    ) : (
+                      pedido.estado
+                    )}
                   </td>
                   <td>
-                    {editIndex === index
-                      ? <button onClick={handleSaveClick}>Guardar</button>
-                      : <>
-                          <button onClick={() => handleEditClick(index)}>
-                            <MdModeEdit className="edit-icon" />
-                          </button>
-                          <button onClick={() => handleCancelClick(index)}>
-                            <TbBasketCancel className="cancel-icon" />
-                          </button>
-                          <button onClick={() => handleAddSaleClick(index)}>
-                            <FaPlusCircle className="add-sale-icon" />
-                          </button>
-                        </>
-                    }
+                    {editIndex === index ? (
+                      <input 
+                        type="date" 
+                        value={pedido.fechaPedido} 
+                        onChange={(e) => handleInputChange(e, 'fechaPedido', index)} 
+                      />
+                    ) : (
+                      pedido.fechaPedido
+                    )}
+                  </td>
+                  <td>{pedido.total}</td>
+                  <td>
+                    {editIndex === index ? (
+                      <>
+                        <button onClick={handleSaveClick}>Guardar</button>
+                        <button onClick={() => setEditIndex(null)}>Cancelar</button>
+                      </>
+                    ) : (
+                      <>
+                        <button onClick={() => handleEditClick(index)}><MdModeEdit /></button>
+                        <button onClick={() => handleCancelClick(index)}><TbBasketCancel /></button>
+                        <button onClick={() => handleAddSaleClick(index)}>Agregar Venta</button>
+                      </>
+                    )}
                   </td>
                 </tr>
-              );
-            })}
+              ))
+            ) : (
+              <tr>
+                <td colSpan="8">No hay pedidos registrados.</td>
+              </tr>
+            )}
           </tbody>
         </table>
-        {cancelIndex !== null && (
-          <div className="cancel-confirmation">
-            <p>¿Estás seguro de que quieres cancelar el pedido?</p>
-            <button onClick={handleConfirmCancel}>Sí</button>
-            <button onClick={handleCancelNo}>No</button>
-          </div>
-        )}
       </main>
+      {cancelIndex !== null && (
+        <div className="confirmation-dialog">
+          <p>¿Estás seguro de que deseas cancelar este pedido?</p>
+          <button onClick={handleConfirmCancel}>Sí</button>
+          <button onClick={handleCancelNo}>No</button>
+        </div>
+      )}
     </div>
   );
 };
 
 export default Pedidos;
-//casi

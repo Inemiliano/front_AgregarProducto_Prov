@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import './AdministrarProductos.css';
-import { ProductContext } from '../Context/ProductContext'; // Asegúrate de que esta ruta sea correcta
+import { ProductContext } from '../Context/ProductContext'; 
 import { TiHome } from "react-icons/ti";
 import { MdCancel } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
@@ -72,7 +72,7 @@ const ProductForm = ({ onProductAdded }) => {
       id: Date.now(),
       name: productName,
       price: parseFloat(productPrice),
-      image: imageUrl, // Asegúrate de que esta URL esté bien configurada en tu backend
+      image: imageUrl, 
       category: productCategory,
       description: productDescription
     };
@@ -84,7 +84,7 @@ const ProductForm = ({ onProductAdded }) => {
     setProductImage(null);
     setProductCategory('');
     setProductDescription('');
-    setImagePreview(null); // Limpiar vista previa
+    setImagePreview(null); 
   };
 
   return (
